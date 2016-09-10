@@ -1,0 +1,2 @@
+type sysfs_tap2wake, fs_type, sysfs_type;
+type sysfs_vibe, fs_type, sysfs_type;

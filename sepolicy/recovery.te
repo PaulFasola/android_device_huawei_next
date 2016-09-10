@@ -1,0 +1,1 @@
+allow recovery selinuxfs:file write;

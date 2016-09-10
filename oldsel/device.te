@@ -1,0 +1,4 @@
+type cir_device, dev_type;
+type modem_block_device, dev_type;
+type rfkill_device, dev_type;
+type encrypt_block_device, dev_type;
