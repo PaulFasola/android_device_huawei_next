@@ -1,6 +1,0 @@
-/boot    bml    boot
-/cache    ext4    /dev/block/mmcblk0p36    NULL    rfs    NULL    rw,nosuid,nodev,check=no
-/userdata    ext4    /dev/block/mmcblk0p42    NULL    rfs    NULL    rw,nosuid,nodev,check=no
-/recovery    bml    /dev/block/mmcblk0p29
-/system    ext4    /dev/block/mmcblk0p39    NULL    rfs    NULL    rw,check=no
-

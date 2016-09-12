@@ -1,13 +1,13 @@
 allow init devpts:chr_file { ioctl getattr };
 allow init graphics_device:chr_file write;
 allow init init_tmpfs:file append;
-allow init kernel:security setcheckreqprot;
+#allow init kernel:security setcheckreqprot;
 allow init kernel:system syslog_read;
 allow init mtp_device:chr_file write;
 allow init proc_sysrq:file getattr;
 allow init property_socket:sock_file write;
-allow init rootfs:file execute_no_trans;
-allow init self:process { dyntransition setcurrent };
+#allow init rootfs:file execute_no_trans;
+#allow init self:process { dyntransition setcurrent };
 allow init vfat:dir { read write open add_name };
 allow init vfat:file { write getattr open create };
 

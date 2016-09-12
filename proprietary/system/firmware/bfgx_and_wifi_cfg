@@ -1,0 +1,25 @@
+@BFGX and WiFi patch info      
+PARA_VERSION=Hi1102V100;      
+PARA_SETPM=1;      
+PARA_WRITEM=2,0x50000140,6;      
+ADDR_FILE_FILES=1,0x70000,/system/vendor/firmware/cr4_asic.bin;      
+ADDR_FILE_FILES=1,0x300E4000,/system/vendor/firmware/CPU_RAM_SCHED.bin;      
+@PARA_CALI_COUNT=0x300E4000;      
+@PARA_JUMP=0x000E0401;      
+ADDR_FILE_FILES=1,0x30168000,/system/vendor/firmware/CPU_RAM_WBS.bin;      
+PARA_CALI_BFGX_DATA=0x30170000;      
+PARA_WRITEM=2,0x60001044,0x1;      
+@buck output 1.35v      
+PARA_WRITEM=2,0x50002280,0x5414;      
+@buck_frq_sel=4'b1010(1.8MHZ)      
+PARA_WRITEM=2,0x50002284,0xAC00;      
+@RFLDO output 1.20v rfldo1_ictr=3'b110      
+PARA_WRITEM=2,0x50002210,0x3518;      
+@rfldo2_ictr=3'b110      
+PARA_WRITEM=2,0x50002214,0x3018;      
+PARA_WRITEM=2,0x50000074,0x1;      
+@PARA_WRITEM=2,0x50000c04,0;      
+@PARA_WRITEM=2,0x50000094,1;      
+SHUTDOWN_BFGX;      
+QUIT;      
+@device_version=20160504154625
