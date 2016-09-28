@@ -20,3 +20,9 @@ ifeq ($(TARGET_DEVICE), next)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
 endif
+
+
+
+# Hacks for build
+$(shell mkdir -p $(OUT)/obj/SHARED_LIBRARIES/libminui_intermediates)
+$(shell touch $(OUT)/obj/SHARED_LIBRARIES/libminui_intermediates/export_includes) 
