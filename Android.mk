@@ -21,7 +21,7 @@ include $(call all-makefiles-under,$(LOCAL_PATH))
 
 endif
 
-
+TARGET_KERNEL_CONFIG := device/huawei/next/defconfig/merge_hi3650_defconfig
 
 # Hacks for build
 $(shell mkdir -p $(OUT)/obj/SHARED_LIBRARIES/libminui_intermediates)
