@@ -1,3 +1,5 @@
+LOCAL_PATH := device/huawei/next
+
 USE_CAMERA_STUB := true
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
@@ -42,10 +44,12 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Kernel
 TARGET_PREBUILT_KERNEL := device/huawei/next/kernel
-BOARD_KERNEL_CMDLINE  := 'mmcparts=mmcblk0:p1(vrl),p2(vrl_backup),p6(modemnvm_factory),p9(splash),p10(modemnvm_backup),p11(modemnvm_img),p12(modemnvm_system),p14(3rdmodemnvm),p15(3rdmodemnvmbkp),p18(modem_om),p21(modemnvm_update),p31(modem),p32(modem_dsp),p35(3rdmodem) loglevel=4 androidboot.selinux=permissive'
+BOARD_KERNEL_CMDLINE  := mmcparts=mmcblk0:p1(vrl),p2(vrl_backup),p6(modemnvm_factory),p9(splash),p10(modemnvm_backup),p11(modemnvm_img),p12(modemnvm_system),p14(3rdmodemnvm),p15(3rdmodemnvmbkp),p18(modem_om),p21(modemnvm_update),p31(modem),p32(modem_dsp),p35(3rdmodem) loglevel=4 androidboot.selinux=permissive
 BOARD_KERNEL_BASE     := 0x00478000
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 --tags_offset 0x07588000
 BOARD_KERNEL_PAGESIZE := 2048
+TARGET_KERNEL_SOURCE := kernel/huawei/malit880
+TARGET_KERNEL_CONFIG := merge_hi3650_defconfig
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
@@ -66,11 +70,11 @@ BRIGHTNESS_SYS_FILE := "/sys/devices/platform/hisi_fb.1048577/leds/lcd_backlight
 
 # ADB
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
-ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1  
+ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 ADDITIONAL_DEFAULT_PROPERTIES += persist.service.debuggable=1
-ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb 
+ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb
 
-# Recovery 
+# Recovery
 RECOVERY_FSTAB_VERSION := 2
 TARGET_RECOVERY_FSTAB := device/huawei/next/hi3650.fstab
 
@@ -82,7 +86,26 @@ BOARD_SEPOLICY_DIRS += \
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 
+# Power
+TARGET_POWERHAL_VARIANT := qcom
+
+# Properties
+TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+
+# Sensors
+USE_SENSOR_MULTI_HAL := true
+
+# Time services
+BOARD_USES_QC_TIME_SERVICES := true
+
+# Qualcomm support
+BOARD_USES_QCOM_HARDWARE := true
+
 # inherit from the proprietary version
 -include vendor/huawei/next/BoardConfigVendor.mk
+
+# Encryption
+TARGET_HW_DISK_ENCRYPTION := true
+
 
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)

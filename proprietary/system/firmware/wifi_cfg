@@ -1,7 +1,0 @@
-@WiFi patch info      
-PARA_VERSION=Hi1102V100;      
-ADDR_FILE_FILES=1,0x70000,/system/vendor/firmware/cr4_asic.bin;      
-@PARA_CALI_COUNT=0x300E4000;      
-@PARA_JUMP=0x000E0401;      
-QUIT;      
-@device_version=20160504154625

@@ -1,0 +1,88 @@
+on early-init
+
+on init
+
+on early-fs
+
+on fs
+
+on post-fs
+    chown system system /proc/uid_iostats/show_uid_iostats
+    chmod 0440 /proc/uid_iostats/show_uid_iostats
+    chown system system /proc/uid_iostats/uid_iomonitor_list
+    chmod 0660 /proc/uid_iostats/uid_iomonitor_list
+    chown system system /proc/uid_iostats/remove_uid_list
+    chmod 0660 /proc/uid_iostats/remove_uid_list
+
+on post-fs-data
+	mkdir /data/nfc
+	chown nfc nfc /data/nfc
+
+on early-boot
+	service HwCamCfgSvr /system/bin/HwCamCfgSvr hi3650 KNIGHT
+	class main
+	user media
+	group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm system dsm
+	ioprio rt 4
+
+on early-boot
+	service vr_daemon /system/bin/vr_daemon
+	class main
+	user system
+	group system
+	socket vr_daemon stream 660 root system graphics		
+
+on boot
+        chmod  0660  /dev/fingerprint
+        chown  system  system  /dev/fingerprint
+        chmod  0660  /sys/devices/platform/fingerprint/irq
+        chown  system  system  /sys/devices/platform/fingerprint/irq
+        chmod  0660  /sys/devices/platform/fingerprint/result
+        chown  system  system  /sys/devices/platform/fingerprint/result
+        chown system system /sys/devices/platform/fingerprint/fingerprint_chip_info
+
+	chown nfc nfc /sys/nfc/nfc_fwupdate
+	chmod 0664 /sys/nfc/nfc_fwupdate
+	chown nfc nfc /sys/nfc/nxp_config_name
+	chmod 0664 /sys/nfc/nxp_config_name
+	chown nfc nfc /sys/nfc/nfc_brcm_conf_name
+	chmod 0664 /sys/nfc/nfc_brcm_conf_name
+	chown nfc nfc /sys/nfc/nfc_sim_switch
+	chmod 0664 /sys/nfc/nfc_sim_switch
+	chown nfc nfc /sys/nfc/nfc_sim_status
+	chmod 0444 /sys/nfc/nfc_sim_status
+	chown nfc nfc /sys/nfc/rd_nfc_sim_status
+	chmod 0444 /sys/nfc/rd_nfc_sim_status
+	chown nfc nfc /sys/nfc/nfc_enable_status
+	chmod 0664 /sys/nfc/nfc_enable_status
+	chown nfc nfc /sys/nfc/nfc_card_num
+	chmod 0444 /sys/nfc/nfc_card_num
+	chown nfc nfc /sys/nfc/nfc_chip_type
+	chmod 0444 /sys/nfc/nfc_chip_type
+	chown nfc nfc /sys/nfc/nfc_fw_version
+	chmod 0444 /sys/nfc/nfc_fw_version
+	chown nfc nfc /sys/nfc/nfcservice_lock
+	chmod 0664 /sys/nfc/nfcservice_lock
+	chown nfc nfc /sys/nfc/nfc_svdd_sw
+	chmod 0664 /sys/nfc/nfc_svdd_sw
+	chown nfc nfc /sys/nfc/nfc_close_type
+	chmod 0664 /sys/nfc/nfc_close_type
+	chown nfc nfc /sys/nfc/nfc_single_channel
+	chmod 0444 /sys/nfc/nfc_single_channel
+	chown system system /sys/devices/platform/huawei_sensor/gsensor_gather_enable
+	chmod 0666 /sys/devices/platform/huawei_sensor/gsensor_gather_enable
+
+	chown root system /dev/ttyAMA0
+	start cs-set
+	wait /dev/cpuset/system-background/cgroup.event_control
+	chmod 0200 /dev/cpuset/system-background/cgroup.event_control
+
+service water_check /system/bin/water_check
+	class late_start
+	user system
+	group system
+	oneshot
+
+service cs-set /system/bin/cs-set -n surfaceflinger
+	user root
+	oneshot

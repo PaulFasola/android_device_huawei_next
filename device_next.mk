@@ -33,7 +33,6 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
 
-
 # ========================================== .PROP OVVERRIDES ==========================================
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
