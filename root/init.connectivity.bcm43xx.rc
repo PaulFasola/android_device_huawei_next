@@ -1,0 +1,2 @@
+import /init.connectivity.gps.rc
+import /init.connectivity.@{/proc/device-tree/bcm_wifi/ic_type}.rc

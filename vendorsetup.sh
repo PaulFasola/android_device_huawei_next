@@ -15,3 +15,4 @@
 #
 
 add_lunch_combo cm_next-userdebug
+add_lunch_combo cm_next-eng

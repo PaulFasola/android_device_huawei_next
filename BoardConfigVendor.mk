@@ -10,7 +10,7 @@ LOCAL_PATH := vendor/huawei/next
 
 
 #PRODUCT_PACKAGES += \
-#	libGLES_mali
+	libGLES_mali
 
 
 PRODUCT_COPY_FILES += \

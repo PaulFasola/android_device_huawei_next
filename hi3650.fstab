@@ -1,3 +1,4 @@
+# Reauired by Boardconfig
 # Android fstab file.
 #<src>                                                  <mnt_point>         <type>    <mnt_flags and options>                       <fs_mgr_flags>
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
