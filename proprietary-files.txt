@@ -1,0 +1,38 @@
+##
+# Automatically generated file by generate_files.py
+# Script by gabry3795 - gabry.gabry <at> hotmail.it
+# 
+# These blobs are extracted from the proprietary version number B320
+#################
+
+framework/com.huawei.audioalgo.jar
+firmware/wifi_cfg
+firmware/cr4_regmem.bin
+firmware/hifi_6402_2spk.img
+firmware/isp_bw.elf
+firmware/isp_fw.elf
+firmware/nvram43455_hw_vn1.txt
+firmware/fw_bcm43455_apsta_hw.bin
+firmware/cr4_asic.bin
+firmware/fw_bcm4334_test_2ant.bin
+firmware/CPU_RAM_SCHED.bin
+firmware/libpn548ad_fw.so
+firmware/fw_bcm43455_test_hw_apsta.bin
+firmware/hifi_6402.img
+firmware/nvram43455_hw.txt
+firmware/Total.wdk
+firmware/isp_dts.img
+firmware/fw_bcm4334_hw_2ant.bin
+firmware/bfgx_cfg
+firmware/BCM4345C0_003.001.025.0103.0000.hcd
+firmware/nvram43455_hw_next_sar.txt
+firmware/bfgx_and_wifi_cfg
+firmware/ram_reg_test_cfg
+firmware/fw_bcm43455_hw.bin
+firmware/CPU_RAM_WBS.bin
+etc/audio_effects.conf
+lib/drm/libdrmwvmplugin.so
+lib/egl/libGLES_mali.so
+
+
+# Total 28 files added on 2016-10-08T17:55:04.949417 UTC

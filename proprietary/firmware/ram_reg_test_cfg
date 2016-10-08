@@ -1,0 +1,6 @@
+@reg&mem test info
+PARA_VERSION=Hi1102V100;
+ADDR_FILE_FILES=1,0x80000,/system/vendor/firmware/cr4_regmem.bin;
+PARA_JUMP=0x000801d3;
+PARA_READM=0x00080000,384;
+QUIT;
