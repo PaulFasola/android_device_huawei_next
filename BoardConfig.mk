@@ -1,13 +1,16 @@
+BOARD_VENDOR := Huawei
 LOCAL_PATH := device/huawei/next
 
 USE_CAMERA_STUB := true
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
-# CPU
+# inherit from the proprietary version
+include vendor/huawei/next/BoardConfigVendor.mk
+
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
-TARGET_BOOTLOADER_BOARD_NAME := HWNXT
+TARGET_BOOTLOADER_BOARD_NAME := NXT
 
 # Architecture
 TARGET_ARCH := arm64
@@ -26,8 +29,6 @@ TARGET_CPU_SMP := true
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mtune=cortex-a15 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mtune=cortex-a15 -mfloat-abi=softfp
 TARGET_EXTRA_CFLAGS := -mtune=cortex-a15 -mcpu=cortex-a15
-
-BOARD_VENDOR := huawei
 TARGET_BOARD_PLATFORM := hi3650
 TARGET_SOC := kirin950
 
@@ -75,18 +76,15 @@ ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb
 
 # Recovery
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := device/huawei/next/hi3650.fstab
+TARGET_RECOVERY_FSTAB := device/huawei/next/recovery/recovery.fstab
 
 # SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/huawei/next/sepolicy
+#BOARD_SEPOLICY_DIRS += \
+#    device/huawei/next/sepolicy
 
 # Paths
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-
-# Power
-TARGET_POWERHAL_VARIANT := qcom
 
 # Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
@@ -94,17 +92,11 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 # Sensors
 USE_SENSOR_MULTI_HAL := true
 
-# Time services
-BOARD_USES_QC_TIME_SERVICES := true
-
-# Qualcomm support
-BOARD_USES_QCOM_HARDWARE := true
-
 # inherit from the proprietary version
 -include vendor/huawei/next/BoardConfigVendor.mk
 
 # Encryption
-TARGET_HW_DISK_ENCRYPTION := true
+#TARGET_HW_DISK_ENCRYPTION := true
 
 
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)

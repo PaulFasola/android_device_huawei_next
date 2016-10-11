@@ -15,13 +15,9 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE), next)
-
+ifeq ($(BOARD_VENDOR), Huawei)
 include $(call all-makefiles-under,$(LOCAL_PATH))
-
-endif
-
-TARGET_KERNEL_CONFIG := device/huawei/next/defconfig/merge_hi3650_defconfig
+endif 
 
 # Hacks for build
 $(shell mkdir -p $(OUT)/obj/SHARED_LIBRARIES/libminui_intermediates)
