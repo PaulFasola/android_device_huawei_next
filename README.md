@@ -1,4 +1,7 @@
-Copyright 2014 - The CyanogenMod Project
+![android: 6.0.1](https://img.shields.io/badge/android:-6.0.1-blue.svg "booting-no")
+![device target: NXT-L29](https://img.shields.io/badge/device target:-NXT_L29-blue.svg "device target-NXT-L29")
+![building: yes](https://img.shields.io/badge/building:-yes-green.svg "building-yes")
+![booting: no](https://img.shields.io/badge/booting:-no-red.svg "booting-no")
 
 Device configuration for Huawei Mate 8
 =====================================
@@ -21,3 +24,5 @@ Release Date | November 2015
 
 
 ![Huawei Mate 8](http://files.paulfasola.fr/CyanogenMod/Huawei-Mate-8.jpg "Huawei Mate 8")
+
+Copyright 2014 - The CyanogenMod Project
