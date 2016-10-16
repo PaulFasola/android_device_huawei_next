@@ -1,27 +1,23 @@
 # Reauired by Boardconfig
 # Android fstab file.
-#<src>                                                  <mnt_point>         <type>    <mnt_flags and options>                       <fs_mgr_flags>
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
-/dev/block/platform/hi_mci.0/by-name/3rdmodem   /3rdmodem   ext4   NULL   flags=display="3rdmodem";backup=1
-/dev/block/platform/hi_mci.0/by-name/boot   /boot   emmc   NULL   NULL
-/dev/block/platform/hi_mci.0/by-name/recovery   /recovery   emmc   NULL   NULL
-/dev/block/platform/hi_mci.0/by-name/cache   /cache    ext4   rw,nosuid,nodev,noatime,data=ordered   wait,check
-/dev/block/platform/hi_mci.0/by-name/cust   /cust    ext4    ro,barrier=1    wait,verify
-/dev/block/platform/hi_mci.0/by-name/misc   /misc   emmc   NULL   flags=display="Misc";backup=0
-/dev/block/platform/hi_mci.0/by-name/oeminfo   /oeminfo   emmc   NULL   flags=display="OEMinfo";backup=1
-/dev/block/platform/hi_mci.0/by-name/userdata   /data   ext4   NULL   NULL
-/dev/block/platform/hi_mci.0/by-name/system   /system   ext4   ro,barrier=1   wait,verify
-/dev/block/mmcblk1p1   /external_sd   vfat   /dev/block/mmcblk1   flags=display="MicroSD-Card";storage;wipeingui;removable,voldmanaged=sdcard:auto,noemulatedsd
-/dev/block/platform/hi_mci.0/by-name/splash2   /splash2   ext4   rw,nosuid,nodev,noatime,data=ordered,context=u:object_r:splash2_data_file:s0   wait,check
-/dev/block/platform/hi_mci.0/by-name/3rdmodem   /3rdmodem   ext4   ro,nosuid,nodev,noatime,data=ordered wait,check
-/dev/block/platform/hi_mci.0/by-name/3rdmodemnvm   /3rdmodemnvm   ext4   rw,nosuid,nodev,noatime,data=ordered,context=u:object_r:radio_data_file:s0   wait,check
-/dev/block/platform/hi_mci.0/by-name/3rdmodemnvmbkp   /3rdmodemnvmbkp   ext4   rw,nosuid,nodev,noatime,data=ordered,context=u:object_r:radio_data_file:s0   wait,check
-#/dev/block/sda1   /usbotg   auto   /dev/block/sda   flags=display="USB-OTG";storage;removable;backup=0
-/dev/block/platform/hi_mci.0/by-name/secure_storage   /sec_storage   ext4      rw,nosuid,nodev,noatime,discard,auto_da_alloc,mblk_io_submit,data=journal,context=u:object_r:teecd_data_file:s0   wait,check
-/devices/hi_mci.1/mmc_host/mmc1/*   auto   auto   defaults   defaults
-/devices/ff200000.hisi_usb/ff100000.dwc3/*   auto   auto   defaults   voldmanaged=usbotg:auto,rw,nosuid,nodev,noatime,user_xattr,acl,barrier=1,data=ordered,noauto_da_alloc,mblk_io_submit,forceencrypt=footer,check
-/dev/block/zram0   none   swap   defaults   zramsize=536870912
+
+#<src>                                               <mnt_point>      <type>    <mnt_flags and options>                                                                                           <fs_mgr_flags>
+/dev/block/platform/hi_mci.0/by-name/boot            /boot             emmc     defaults                                                                                                          defaults
+#/dev/block/platform/hi_mci.0/by-name/recovery        /recovery        auto     defaults                                                                                                          recoveryonly
+/dev/block/platform/hi_mci.0/by-name/cache           /cache            ext4     rw,nosuid,nodev,noatime,data=ordered                                                                              wait,check
+/dev/block/platform/hi_mci.0/by-name/cust            /cust             ext4     ro,barrier=1                                                                                                      wait,verify
+/dev/block/platform/hi_mci.0/by-name/userdata        /data             ext4     rw,nosuid,nodev,noatime,user_xattr,acl,barrier=1,data=ordered,noauto_da_alloc,mblk_io_submit,discard              wait,forceencrypt=footer,check
+/dev/block/platform/hi_mci.0/by-name/system          /system           ext4     ro,barrier=1                                                                                                      wait,verify
+/dev/block/platform/hi_mci.0/by-name/splash2         /splash2          ext4     rw,nosuid,nodev,noatime,data=ordered,context=u:object_r:splash2_data_file:s0                                      wait,check
+/dev/block/platform/hi_mci.0/by-name/3rdmodem        /3rdmodem         ext4     ro,nosuid,nodev,noatime,data=ordered                                                                              wait,check 
+/dev/block/platform/hi_mci.0/by-name/3rdmodemnvm     /3rdmodemnvm      ext4     rw,nosuid,nodev,noatime,data=ordered,context=u:object_r:radio_data_file:s0                                        wait,check
+/dev/block/platform/hi_mci.0/by-name/3rdmodemnvmbkp  /3rdmodemnvmbkp   ext4     rw,nosuid,nodev,noatime,data=ordered,context=u:object_r:radio_data_file:s0                                        wait,check
+/dev/block/platform/hi_mci.0/by-name/secure_storage  /sec_storage      ext4     rw,nosuid,nodev,noatime,discard,auto_da_alloc,mblk_io_submit,data=journal,context=u:object_r:teecd_data_file:s0   wait,check
+/devices/hi_mci.1/mmc_host/mmc1/*                    auto              auto     defaults                                                                                                          voldmanaged=sdcard:auto,noemulatedsd
+/devices/ff200000.hisi_usb/ff100000.dwc3/*           auto              auto     defaults                                                                                                          voldmanaged=usbotg:auto
+/dev/block/zram0                                     none              swap     defaults                                                                                                          zramsize=536870912
 
 
 

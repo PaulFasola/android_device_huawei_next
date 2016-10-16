@@ -1,0 +1,33 @@
+
+on property:sys.usb.config=hisi_debug,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 12d1
+    write /sys/class/android_usb/android0/idProduct 107e
+    write /sys/class/android_usb/android0/iSerial $ro.serialno
+    write /sys/class/android_usb/android0/f_rndis/wceis  1
+    write /sys/class/android_usb/android0/functions rndis,adb,balong_acm
+    write /sys/class/android_usb/android0/enable 1
+    stop atcmdserver
+    start hw_cdma_service
+    start adbd
+    start usbshell
+    write /sys/class/net/rndis0/queues/rx-0/rps_cpus f
+    setprop sys.usb.state $sys.usb.config
+
+on property:sys.usb.config=hisi_debug
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 12d1
+    write /sys/class/android_usb/android0/idProduct 107e
+    write /sys/class/android_usb/android0/iSerial $ro.serialno
+    write /sys/class/android_usb/android0/f_rndis/wceis  1
+    write /sys/class/android_usb/android0/functions rndis,balong_acm
+    write /sys/class/android_usb/android0/enable 1
+    stop atcmdserver
+    start hw_cdma_service
+    start usbshell
+    write /sys/class/net/rndis0/queues/rx-0/rps_cpus f
+    setprop sys.usb.state $sys.usb.config
+
+on boot
+    chown system system /sys/devices/ff200000.hisi_usb/plugusb
+    chmod 0660 /sys/devices/ff200000.hisi_usb/plugusb
