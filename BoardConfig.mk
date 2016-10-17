@@ -5,7 +5,7 @@ USE_CAMERA_STUB := true
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
 # inherit from the proprietary version
-include vendor/huawei/next/BoardConfigVendor.mk
+-include vendor/huawei/next/BoardConfigVendor.mk
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -86,6 +86,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
 ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 ADDITIONAL_DEFAULT_PROPERTIES += persist.service.debuggable=1
 ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb
+ADDITIONAL_DEFAULT_PROPERTIES += ro.hardware=hi3650
 
 # Recovery
 RECOVERY_FSTAB_VERSION := 2

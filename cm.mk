@@ -24,7 +24,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.debuggable=1 \
 	persist.sys.usb.config=mtp,adb \
 	persist.logd.logpersistd=logcatd \
-	debug.graphic_log=1
+	debug.graphic_log=1 \
+        ro.hardware=hi3650
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := next

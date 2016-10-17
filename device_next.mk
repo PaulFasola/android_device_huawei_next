@@ -38,7 +38,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.adb.secure=0 \
 	ro.secure=0 \
 	ro.debuggable=1 \
-	ro.zygote=zygote64_32
+   	ro.zygote=zygote64_32
+        ro.hardware=hi3650
 
 LOCAL_PATH := device/huawei/next
 
