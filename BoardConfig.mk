@@ -4,9 +4,6 @@ LOCAL_PATH := device/huawei/next
 USE_CAMERA_STUB := true
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
-# inherit from the proprietary version
--include vendor/huawei/next/BoardConfigVendor.mk
-
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := hi3650
@@ -47,7 +44,7 @@ BOARD_KERNEL_TAGS_OFFSET := 0x07588000
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x07b88000
 
-BOARD_KERNEL_CMDLINE  := mmcparts=mmcblk0:p1(vrl),p2(vrl_backup),p6(modemnvm_factory),p9(splash),p10(modemnvm_backup),p11(modemnvm_img),p12(modemnvm_system),p14(3rdmodemnvm),p15(3rdmodemnvmbkp),p18(modem_om),p21(modemnvm_update),p31(modem),p32(modem_dsp),p35(3rdmodem) loglevel=4 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE  := mmcparts=mmcblk0:p1(vrl),p2(vrl_backup),p6(modemnvm_factory),p9(splash),p10(modemnvm_backup),p11(modemnvm_img),p12(modemnvm_system),p14(3rdmodemnvm),p15(3rdmodemnvmbkp),p18(modem_om),p21(modemnvm_update),p31(modem),p32(modem_dsp),p35(3rdmodem) loglevel=4 androidboot.hardware=hi3650 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 TARGET_PREBUILT_KERNEL := device/huawei/next-kernel/kernel
 
@@ -87,7 +84,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
 ADDITIONAL_DEFAULT_PROPERTIES += persist.service.debuggable=1
 ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb
 ADDITIONAL_DEFAULT_PROPERTIES += ro.hardware=hi3650
-
+ADDITIONAL_DEFAULT_PROPERTIES += ro.connectivity.sub_chiptype=bcm43xx
 # Recovery
 RECOVERY_FSTAB_VERSION := 2
 TARGET_RECOVERY_FSTAB := device/huawei/next/recovery/recovery.fstab
@@ -120,6 +117,14 @@ USE_SENSOR_MULTI_HAL := true
 
 # Encryption
 #TARGET_HW_DISK_ENCRYPTION := true
+
+# Enable ADB during boot for debugging. (Very unsafe. Remove before public build)
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.adb.secure=0 \
+	ro.secure=0 \
+	ro.debuggable=1 \
+   	ro.zygote=zygote64_32
+        ro.hardware=hi3650
 
 
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
