@@ -13,7 +13,7 @@ $(call inherit-product, build/target/product/full.mk)
 DEVICE_PACKAGE_OVERLAYS += device/huawei/next/overlay
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/huawei/next-kernel/kernel
+	LOCAL_KERNEL := device/huawei/next/kernel
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif

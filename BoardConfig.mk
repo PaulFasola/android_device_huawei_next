@@ -46,7 +46,7 @@ BOARD_RAMDISK_OFFSET := 0x07b88000
 
 BOARD_KERNEL_CMDLINE  := mmcparts=mmcblk0:p1(vrl),p2(vrl_backup),p6(modemnvm_factory),p9(splash),p10(modemnvm_backup),p11(modemnvm_img),p12(modemnvm_system),p14(3rdmodemnvm),p15(3rdmodemnvmbkp),p18(modem_om),p21(modemnvm_update),p31(modem),p32(modem_dsp),p35(3rdmodem) loglevel=4 androidboot.hardware=hi3650 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-TARGET_PREBUILT_KERNEL := device/huawei/next-kernel/kernel
+TARGET_PREBUILT_KERNEL := device/huawei/next/kernel
 
 #TARGET_KERNEL_SOURCE := kernel/huawei/malit880
 #TARGET_KERNEL_CONFIG := merge_hi3650_defconfig
