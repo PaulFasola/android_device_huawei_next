@@ -1,3 +1,9 @@
+Repository  | Url
+-----------:|:-------------------------
+Vendor      | https://github.com/PaulFasola/proprietary_vendor_huawei
+Kernel      | https://github.com/PaulFasola/android_device_kernel_next  
+<br />
+
 ![android: 6.0.1](https://img.shields.io/badge/android:-6.0.1-blue.svg "booting-no")
 ![device target: NXT-L29](https://img.shields.io/badge/device target:-NXT_L29-blue.svg "device target-NXT-L29")
 ![building: yes](https://img.shields.io/badge/building:-yes-green.svg "building-yes")
