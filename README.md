@@ -1,16 +1,18 @@
+Device configuration for Huawei Mate 8
+=====================================
+![android: 6.0.1](https://img.shields.io/badge/android:-6.0.1-blue.svg "booting-no")
+![device target: NXT-L29](https://img.shields.io/badge/device target:-NXT_L29-blue.svg "device target-NXT-L29")
+![building: yes](https://img.shields.io/badge/building:-yes-green.svg "building-yes")
+![booting: no](https://img.shields.io/badge/booting:-no-red.svg "booting-no")
+<br/><br/>
+**Porting state :** [click here](https://github.com/PaulFasola/android_device_huawei_next/projects/1)
+
+
 Repository  | Url
 -----------:|:-------------------------
 Vendor      | https://github.com/PaulFasola/proprietary_vendor_huawei
 Kernel      | https://github.com/PaulFasola/android_device_kernel_next  
 <br />
-
-![android: 6.0.1](https://img.shields.io/badge/android:-6.0.1-blue.svg "booting-no")
-![device target: NXT-L29](https://img.shields.io/badge/device target:-NXT_L29-blue.svg "device target-NXT-L29")
-![building: yes](https://img.shields.io/badge/building:-yes-green.svg "building-yes")
-![booting: no](https://img.shields.io/badge/booting:-no-red.svg "booting-no")
-
-Device configuration for Huawei Mate 8
-=====================================
 
 Basic   | Spec Sheet
 -------:|:-------------------------
