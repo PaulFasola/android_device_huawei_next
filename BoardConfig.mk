@@ -65,7 +65,7 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 
 # Display
-TARGET_BOOTANIMATION_PRELOAD := false
+TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := false
 TARGET_USE_PAN_DISPLAY := false
 BRIGHTNESS_SYS_FILE := "/sys/devices/platform/hisi_fb.1048577/leds/lcd_backlight0/brightness"
