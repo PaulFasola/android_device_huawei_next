@@ -1,0 +1,111 @@
+# Copyright (c) 2012-2016, The Linux Foundation. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#     * Neither the name of The Linux Foundation nor
+#       the names of its contributors may be used to endorse or promote
+#       products derived from this software without specific prior written
+#       permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NON-INFRINGEMENT ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+/dev/ion                0664    system  system
+/dev/mali0              0666    system  system
+/dev/graphics/fb2       0660    system  system
+/dev/rpmsg-hisi0        0600    media   media
+/dev/memory_throughput	0660	system	system
+/dev/memory_throughput_up_threshold	0660	system	system
+/dev/imgsysbrg_vdec0    0660    system  camera
+
+/dev/ttySPI0 		0660 	root radio
+/dev/ttySPI1 		0660 	root system
+/dev/ttySPI2 		0660 	root radio
+/dev/ttySPI3 		0660 	root system
+/dev/ttySPI4 		0440 	root root
+/dev/ttySPI5 		0660 	root system
+/dev/ttySPI6 		0660 	root system
+/dev/ttySPI7 		0660 	root radio
+/dev/ttySPI8 		0440 	root root
+/dev/ttySPI9 		0660 	root radio
+/dev/ttySPI10 		0660 	root radio
+/dev/ttySPI11 		0660 	root system
+/dev/ttySPI12 		0440 	root root
+/dev/ttySPI13 		0440 	root root
+/dev/ttySPI14 		0440 	root root
+
+/dev/video0		0660  system 	camera
+/dev/video1		0660  system 	camera
+/dev/video2		0660  system 	camera
+/dev/video3		0660  system 	camera
+/dev/video4		0660  system 	camera
+/dev/video5		0660  system 	camera
+/dev/video6		0660  system 	camera
+/dev/video7		0660  system 	camera
+/dev/video8		0660  system 	camera
+/dev/media0		0660  system 	camera
+/dev/media1		0660  system 	camera
+/dev/media2		0660  system 	camera
+/dev/media3		0660  system 	camera
+/dev/media4		0660  system 	camera
+/dev/media5		0660  system 	camera
+/dev/media6		0660  system 	camera
+/dev/media7		0660  system 	camera
+
+/dev/v4l-subdev0	0660  system 	camera
+/dev/v4l-subdev1	0660  system 	camera
+/dev/v4l-subdev2	0660  system 	camera
+/dev/v4l-subdev3	0660  system 	camera
+/dev/v4l-subdev4	0660  system 	camera
+/dev/v4l-subdev5	0660  system 	camera
+/dev/v4l-subdev6	0660  system 	camera
+/dev/v4l-subdev7	0660  system 	camera
+/dev/v4l-subdev8	0660  system 	camera
+/dev/hisi-ivp		0660  system    camera
+/dev/ivp-ipc		0660  system    camera
+
+/sys/class/leds/torch/brightness			0664  system    system
+/sys/class/leds/torch/flash_thermal_protect		0664  system    system
+/dev/hifi_misc                                          0770  root      audio
+/dev/block/mmcblk0p19                                   0660  system    system
+
+/dev/dsm                  0660  system    system
+/dev/block/mmcblk0p4      0660  system    system
+/dev/block/mmcblk0p20     0660  system    system
+/dev/hwtc		  0660  system	  system
+
+/dev/pn544                0660   nfc        nfc
+
+/dev/act                  0660   radio      radio
+
+/dev/hwlog_exception      0666   root       log
+/dev/log/main             0662   root       log
+/dev/log/radio            0662   root       log
+/dev/log/system           0662   root       log
+/dev/log/events           0662   root       log
+/dev/log/hilog            0662   root       log
+
+/dev/android_hdb          0660   adb        adb
+/dev/android_hdb_enable   0660   adb        adb
+
+/dev/hwvr0                0664   root       system
+/dev/hwvr1                0664   root       system
+/dev/hwvrdfu              0660   root       system
+
+/dev/vmodem		  0660   radio	    radio
+/dev/ttyAMA1		  0660   radio	    radio

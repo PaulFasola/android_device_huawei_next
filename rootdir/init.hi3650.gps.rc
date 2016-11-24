@@ -1,0 +1,59 @@
+on post-fs-data
+
+    mkdir /data/gps 775 system system
+    mkdir /data/gps/log 770
+
+    mkdir /data/hwzd_logs/gps_log 775 root system
+    mkdir /data/hwzd_logs/gps_log/.tmp 775 gps system
+	
+    mkdir /data/hwzd_logs/gps_log/ipa 775 root system
+    mkdir /data/hwzd_logs/gps_log/ipa/log 775 root system
+
+    mkdir /data/hwzd_logs/gps_log/gps 775 gps system
+    mkdir /data/hwzd_logs/gps_log/lhd 775 gps system
+
+    mkdir /data/hwzd_logs/gps_log/gps/.tmp 775 gps system
+    mkdir /data/hwzd_logs/gps_log/lhd/.tmp 775 gps system
+
+    chmod 660 /data/gps/.flp.interface.pipe.to_gpsd
+    chmod 660 /data/gps/.flp.interface.pipe.to_jni
+    chmod 660 /data/gps/.gps.interface.pipe.to_gpsd
+    chmod 660 /data/gps/.gps.interface.pipe.to_jni
+    chmod 660 /data/gps/.pipe.gpsd_to_lhd.to_client
+    chmod 660 /data/gps/.pipe.gpsd_to_lhd.to_server
+
+
+on boot
+    chown root system /dev/ttyAMA3
+    chmod 0664 /dev/ttyAMA3
+    chown root system /dev/gpstty
+    chmod 0664 /dev/gpstty
+    chown gps system /dev/appvcom9
+    chmod 0664 /dev/appvcom9
+    chown root system /proc/gps/nstandby
+    chmod 0664 /proc/gps/nstandby
+
+    service gpsdaemon /system/bin/gpsdaemon
+    class main
+    oneshot
+
+    service gpsd_47531  /system/bin/glgps47531 -c /data/gps/gpsconfig.xml
+    socket gps seqpacket 660 gps system
+    class main
+    user gps
+    group system inet sdcard_rw
+    disabled
+
+    service gpsdcl_47531  /system/bin/glgps47531cl -c /data/gps/gpsconfig.xml
+    socket gps seqpacket 660 gps system
+    class main
+    user gps
+    group system inet sdcard_rw
+    disabled
+
+    service ipld /system/bin/inv_ipld  /system/etc/inv_ipld_beta.prop
+    class main
+    user system
+    group system
+    disabled
+

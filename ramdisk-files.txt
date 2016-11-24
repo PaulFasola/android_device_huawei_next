@@ -1,0 +1,44 @@
+##
+# Automatically generated file by generate_files.py
+# Script by gabry3795 - gabry.gabry <at> hotmail.it
+# 
+# These blobs are extracted from the proprietary version number B320
+#################
+
+init.balong_modem.rc
+init.chip.usb.rc
+init.connectivity.rc
+init.connectivity.bcm43455.rc
+fstab.hi3650
+init.hi3650.rc
+init.connectivity.bcm43xx.rc
+init.audio.rc
+init.zygote64_32.rc
+init.protocol.rc
+init.post-fs-data.rc
+init.extmodem.rc
+init.performance.rc
+init.hi3650.gps.rc
+init.rc.lol
+init.hi3650.usb.rc
+init.tee.rc
+ueventd.hi3650.rc
+init.connectivity.hisi.rc
+init.hi3650.power.sh
+init.manufacture.rc
+init.rc
+init.device.rc
+init.zygote32.rc
+init.platform.rc
+init.connectivity.gps.rc
+init.hisi.rc
+init.hi3650.power.rc
+sbin/logctl_service
+sbin/teecd
+sbin/check_root
+sbin/oeminfo_nvm_server
+sbin/hw_ueventd
+sbin/ntfs-3gd
+
+
+# Total 34 files added on 2016-11-22T23:39:59.436528 UTC

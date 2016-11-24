@@ -64,6 +64,8 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 # USB mass storage
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 
+TARGET_PROVIDES_INIT_RC := true
+
 # Display
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := false
