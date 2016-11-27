@@ -1,16 +1,13 @@
 LOCAL_PATH := device/huawei/next
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
-# The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
-
-$(call inherit-product, $(LOCAL_PATH)/../../../vendor/huawei/next/BoardConfigVendor.mk)
-
-$(call inherit-product, build/target/product/full.mk)
-
-
 DEVICE_PACKAGE_OVERLAYS += device/huawei/next/overlay
+
+$(call inherit-product, build/target/product/full_base_telephony.mk)
+$(call inherit-product, build/target/product/languages_full.mk)
+
+$(call inherit-product, vendor/huawei/next/BoardConfigVendor.mk)
+
+$(call inherit-product, build/target/product/core_64_bit.mk)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := device/huawei/next/kernel

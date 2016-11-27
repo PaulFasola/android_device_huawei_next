@@ -5,25 +5,25 @@
 #TODO: Add 'check' as fs_mgr_flags with data partition.
 # Currently we dont have e2fsck compiled. So fs check would failed.
 
-#<src>                                                  <mnt_point>     <type>	<mnt_flags and options>                                                         <fs_mgr_flags>
-/dev/block/platform/hi_mci.0/by-name/system             /system         ext4	ro,barrier=1	                                                                wait
-userdata					        /data	        f2fs	nosuid,nodev,noatime,discard,inline_data,inline_xattr	                        wait,check,formattable,encryptable=footer
-userdata					        /data	        ext4	nosuid,nodev,noatime,nodiratime,noauto_da_alloc,nobarrier                       wait,check,formattable,encryptable=footer
-/dev/block/platform/hi_mci.0/by-name/cache              /cache          ext4	rw,nosuid,nodev,noatime,data=ordered                                            wait,check,formattable
+#<src>                                                  <mnt_point>     <type>	<mnt_flags and options>                                                                   <fs_mgr_flags>
+/dev/block/platform/hi_mci.0/by-name/system             /system         ext4	ro,barrier=1	                                                                          wait
+/dev/block/platform/hi_mci.0/by-name/userdata	        /data           f2fs    rw,nosuid,nodev,noatime,user_xattr,acl,barrier=1,data=ordered,noauto_da_alloc,discard     wait,encryptable=footer,check
+/dev/block/platform/hi_mci.0/by-name/cache              /cache          ext4	rw,nosuid,nodev,noatime,data=ordered                                                      wait,check,formattable
 
-#/dev/block/platform/hi_mci.0/by-name/splash2            /splash2        ext4    rw,nosuid,nodev,noatime,data=ordered						wait,check
-/dev/block/platform/hi_mci.0/by-name/3rdmodem           /3rdmodem       ext4    ro,nosuid,nodev,noatime,data=ordered						wait,check
-/dev/block/platform/hi_mci.0/by-name/3rdmodemnvm	/3rdmodemnvm    ext4    rw,nosuid,nodev,noatime,data=ordered						wait,check
-/dev/block/platform/hi_mci.0/by-name/3rdmodemnvmbkp	/3rdmodemnvmbkp ext4    rw,nosuid,nodev,noatime,data=ordered						wait,check
-/dev/block/platform/hi_mci.0/by-name/secure_storage	/sec_storage    ext4    rw,nosuid,nodev,noatime,discard,nodelalloc,data=journal				wait,check
+#/dev/block/platform/hi_mci.0/by-name/splash2           /splash2        ext4    rw,nosuid,nodev,noatime,data=ordered					                  wait,check
+/dev/block/platform/hi_mci.0/by-name/3rdmodem           /3rdmodem       ext4    ro,nosuid,nodev,noatime,data=ordered						          wait,check
+/dev/block/platform/hi_mci.0/by-name/3rdmodemnvm	/3rdmodemnvm    ext4    rw,nosuid,nodev,noatime,data=ordered						          wait,check
+/dev/block/platform/hi_mci.0/by-name/3rdmodemnvmbkp	/3rdmodemnvmbkp ext4    rw,nosuid,nodev,noatime,data=ordered						          wait,check
+/dev/block/platform/hi_mci.0/by-name/secure_storage	/sec_storage    ext4    rw,nosuid,nodev,noatime,discard,nodelalloc,data=journal				          wait,check
 
-/dev/block/platform/hi_mci.0/by-name/modemnvm_img	/mnvm2:0	ext4    rw,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered			wait,check
-/dev/block/platform/hi_mci.0/by-name/modem_om		/modem_log	ext4    rw,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered			wait,check
+/dev/block/platform/hi_mci.0/by-name/modemnvm_img	/mnvm2:0	ext4    rw,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered			          wait,check
+/dev/block/platform/hi_mci.0/by-name/modem_om		/modem_log	ext4    rw,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered			          wait,check
 
-/dev/block/platform/hi_mci.0/by-name/misc               /misc           emmc	defaults                                                                        recoveryonly
-/dev/block/platform/hi_mci.0/by-name/boot               /boot           emmc    defaults                                                                        recoveryonly
-/dev/block/platform/hi_mci.0/by-name/recovery           /recovery       emmc    defaults                                                                        recoveryonly
+/dev/block/platform/hi_mci.0/by-name/misc               /misc           emmc	defaults                                                                                  recoveryonly
+/dev/block/platform/hi_mci.0/by-name/boot               /boot           emmc    defaults                                                                                  recoveryonly
+/dev/block/platform/hi_mci.0/by-name/recovery           /recovery       emmc    defaults                                                                                  recoveryonly
 
-/devices/hi_mci.1/mmc_host/mmc1/*                       auto            auto    defaults									wait,voldmanaged=sdcard1:auto,encryptable=userdata
-/devices/ff200000.hisi_usb/ff100000.dwc3/*              auto            auto    defaults									wait,voldmanaged=usb:auto
+/devices/hi_mci.1/mmc_host/mmc1/*                       auto            auto    defaults									          wait,voldmanaged=sdcard:auto,noemulatedsd
+/devices/ff200000.hisi_usb/ff100000.dwc3/*              auto            auto    defaults									          wait,voldmanaged=usb:auto
 
+/dev/block/zram0                                        none            swap    defaults                                                                                  zramsize=536870912
