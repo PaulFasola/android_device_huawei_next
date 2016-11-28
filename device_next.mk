@@ -3,6 +3,7 @@ LOCAL_PATH := device/huawei/next
 DEVICE_PACKAGE_OVERLAYS += device/huawei/next/overlay
 
 $(call inherit-product, build/target/product/full_base_telephony.mk)
+
 $(call inherit-product, build/target/product/languages_full.mk)
 
 $(call inherit-product, vendor/huawei/next/BoardConfigVendor.mk)
@@ -23,7 +24,7 @@ PRODUCT_PACKAGES += libshim_general \
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
@@ -52,7 +53,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/init.extmodem.rc:root/init.extmodem.rc \
 	$(LOCAL_PATH)/rootdir/init.performance.rc:root/init.performance.rc \
 	$(LOCAL_PATH)/rootdir/init.hi3650.gps.rc:root/init.hi3650.gps.rc \
-	$(LOCAL_PATH)/rootdir/init.rc.lol:root/init.rc.lol \
 	$(LOCAL_PATH)/rootdir/init.hi3650.usb.rc:root/init.hi3650.usb.rc \
 	$(LOCAL_PATH)/rootdir/init.tee.rc:root/init.tee.rc \
 	$(LOCAL_PATH)/rootdir/ueventd.hi3650.rc:root/ueventd.hi3650.rc \

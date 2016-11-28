@@ -7,7 +7,7 @@
 
 #<src>                                                  <mnt_point>     <type>	<mnt_flags and options>                                                                   <fs_mgr_flags>
 /dev/block/platform/hi_mci.0/by-name/system             /system         ext4	ro,barrier=1	                                                                          wait
-/dev/block/platform/hi_mci.0/by-name/userdata	        /data           f2fs    rw,nosuid,nodev,noatime,user_xattr,acl,barrier=1,data=ordered,noauto_da_alloc,discard     wait,encryptable=footer,check
+/dev/block/platform/hi_mci.0/by-name/userdata           /data           ext4    rw,nosuid,nodev,noatime,user_xattr,acl,barrier=1,data=ordered,noauto_da_alloc,discard     wait,encryptable=footer,check
 /dev/block/platform/hi_mci.0/by-name/cache              /cache          ext4	rw,nosuid,nodev,noatime,data=ordered                                                      wait,check,formattable
 
 #/dev/block/platform/hi_mci.0/by-name/splash2           /splash2        ext4    rw,nosuid,nodev,noatime,data=ordered					                  wait,check
@@ -26,4 +26,3 @@
 /devices/hi_mci.1/mmc_host/mmc1/*                       auto            auto    defaults									          wait,voldmanaged=sdcard:auto,noemulatedsd
 /devices/ff200000.hisi_usb/ff100000.dwc3/*              auto            auto    defaults									          wait,voldmanaged=usb:auto
 
-/dev/block/zram0                                        none            swap    defaults                                                                                  zramsize=536870912

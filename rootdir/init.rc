@@ -21,9 +21,11 @@ import /init.platform.rc
 import /init.protocol.rc
 
 import /init.trace.rc
+
 # Include CM's extra init file
 import /init.cm.rc
 
+import /init.post-fs-data.rc
 
 on early-init
     # Set init and its forked children's oom_adj.

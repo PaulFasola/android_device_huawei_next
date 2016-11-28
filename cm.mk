@@ -7,13 +7,6 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 # Inherit device configuration
 $(call inherit-product, device/huawei/next/device_next.mk)
 
-# Screen density
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
-
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
 
 # .PROP OVERRIDE
 
@@ -33,3 +26,9 @@ PRODUCT_NAME := cm_next
 PRODUCT_BRAND := huawei
 PRODUCT_MODEL := next
 PRODUCT_MANUFACTURER := HUAWEI
+
+# Dalvik Heap
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-dalvik-heap.mk)
+
+# HwUI
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
