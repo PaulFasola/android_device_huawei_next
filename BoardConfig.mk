@@ -3,6 +3,8 @@ LOCAL_PATH := device/huawei/next
 
 USE_CAMERA_STUB := true
 
+TARGET_PROVIDES_INIT_RC := true
+
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := hi3650
@@ -60,18 +62,28 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 26935820288
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-# USB mass storage
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
+# RIL
+COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+#BOARD_RIL_CLASS :=
+PROTOBUF_SUPPORTED := true
+TARGET_RIL_VARIANT := proprietary
 
-TARGET_PROVIDES_INIT_RC := true
+# USB
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun/file"
 
 # Display
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := false
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 TARGET_USE_PAN_DISPLAY := false
+ANDROID_ENABLE_RENDERSCRIPT := true
 BRIGHTNESS_SYS_FILE := "/sys/devices/platform/hisi_fb.1048577/leds/lcd_backlight0/brightness"
+BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
+USE_OPENGL_RENDERER := true
 ENABLE_WEBGL := true
+
+# Audio
+BOARD_USES_GENERIC_AUDIO := false
 
 # Wifi
 TARGET_USES_64_BIT_BCMDHD	 := true
@@ -88,8 +100,6 @@ WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm43455_apsta_h
 WIFI_DRIVER_FW_PATH_P2P          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
 WIFI_BAND := 802_11_ABG
 
-
-
 # Recovery
 RECOVERY_FSTAB_VERSION := 2
 TARGET_RECOVERY_FSTAB := device/huawei/next/recovery/recovery.fstab
@@ -103,13 +113,6 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
-# SELinux  -- todo
-#BOARD_SEPOLICY_DIRS += \
-#    device/huawei/next/sepolicy
-
-# Paths
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 
 # Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
