@@ -8,7 +8,7 @@ ro.build.version.base_os=
 ro.build.date=Tue Feb  2 03:04:18 CST 2016
 ro.build.date.utc=1454353458
 ro.build.type=user
-ro.build.user=jenkins
+ro.build.user=paul.fasola
 ro.build.host=WUH1000016698
 ro.build.flavor=NEXT-user
 ro.product.model=NEXT
@@ -32,10 +32,7 @@ ro.build.hide=false
 # from device/hisi/hi3650/system.prop
 #
 
-ro.config.ringtone=Huawei_Tune_Orchestral.ogg
-ro.config.notification_sound=Bongo.ogg
 ro.carrier=unknown
-ro.config.alarm_alert=Creamy.ogg
 ro.setupwizard.mode=OPTIONAL
 ro.com.google.gmsversion=6.0_r2
 persist.sys.art.opt.enable=true
@@ -51,6 +48,8 @@ ro.config.fm_type=libbcmfm_if
 persist.radio.apm_sim_not_pwdn=1
 persist.service.tm2.tofile=true
 persist.sys.dualcards=true
+persist.sys.strictmode.visual=0
+persist.sys.strictmode.disable=1
 ril.hw_modem0.rssi=-1
 ril.hw_modem1.rssi=-1
 ro.cellbroadcast.emergencyids=0-65534
@@ -105,9 +104,7 @@ ro.systemui.debug=true
 ro.config.fp_navigation=true
 ro.config.conn_diagnose=true
 
-ro.cust.cdrom=/system/cdrom/autorun.iso
 ro.hwcamera.use.videosize.1080p=true
-ro.config.ringtone2=Huawei_Tune.ogg
 ro.config.finger_joint=true
 ro.huawei.multiwindow=true
 ro.config.mm_socket_ctrl=1
@@ -149,4 +146,4 @@ ro.secure=0
 
 qemu.hw.mainkeys=0
 ro.show.navigationbar=0
-ro.sf.lcd_density=300
+ro.sf.lcd_density=340

@@ -15,9 +15,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.secure=0 \
 	ro.allow.mock.location=1 \
 	ro.debuggable=1 \
-	persist.sys.usb.config=mtp,adb \
+	persist.sys.usb.config=mtp \
 	persist.logd.logpersistd=logcatd \
-	debug.graphic_log=1 \
         ro.hardware=hi3650
 
 # Device identifier. This must come after all inclusions
