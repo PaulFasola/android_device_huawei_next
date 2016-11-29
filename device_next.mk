@@ -1,11 +1,14 @@
 LOCAL_PATH := device/huawei/next
 
-DEVICE_PACKAGE_OVERLAYS += device/huawei/next/overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 $(call inherit-product, build/target/product/full_base_telephony.mk)
 $(call inherit-product, build/target/product/languages_full.mk)
 $(call inherit-product, vendor/huawei/next/BoardConfigVendor.mk)
 $(call inherit-product, build/target/product/core_64_bit.mk)
+$(call inherit-product, build/target/product/core_64_bit.mk)
+
+
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := device/huawei/next/kernel
@@ -69,3 +72,14 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/sbin/oeminfo_nvm_server:root/sbin/oeminfo_nvm_server \
 	$(LOCAL_PATH)/rootdir/sbin/hw_ueventd:root/sbin/hw_ueventd \
 	$(LOCAL_PATH)/rootdir/sbin/ntfs-3gd:root/sbin/ntfs-3gd
+
+# Bluetooth
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/bluetooth/auto_pair_devlist.conf:system/etc/bluetooth/auto_pair_devlist.conf \
+	$(LOCAL_PATH)/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
+	$(LOCAl_PATH)/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf
+	$(LOCAl_PATH)/bluetooth/bt_stack_beta.conf:system/etc/bluetooth/bt_stack_beta.conf
+	$(LOCAl_PATH)/bluetooth/bt_stack_log.conf:system/etc/bluetooth/bt_stack_log.conf
+	$(LOCAl_PATH)/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf
+	$(LOCAl_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
