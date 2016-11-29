@@ -2,7 +2,6 @@ BOARD_VENDOR := Huawei
 LOCAL_PATH := device/huawei/next
 
 USE_CAMERA_STUB := true
-PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -69,8 +68,27 @@ TARGET_PROVIDES_INIT_RC := true
 # Display
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := false
+PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 TARGET_USE_PAN_DISPLAY := false
 BRIGHTNESS_SYS_FILE := "/sys/devices/platform/hisi_fb.1048577/leds/lcd_backlight0/brightness"
+ENABLE_WEBGL := true
+
+# Wifi
+TARGET_USES_64_BIT_BCMDHD	 := true
+BOARD_WLAN_DEVICE                := bcmdhd
+BOARD_WLAN_DEVICE_REV            := bcm4345
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm43455_apsta_hw.bin"
+WIFI_DRIVER_FW_PATH_P2P          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
+WIFI_BAND := 802_11_ABG
+
+
 
 # Recovery
 RECOVERY_FSTAB_VERSION := 2
@@ -102,9 +120,6 @@ USE_SENSOR_MULTI_HAL := true
 # inherit from the proprietary version
 -include vendor/huawei/next/BoardConfigVendor.mk
 
-# Encryption
-#TARGET_HW_DISK_ENCRYPTION := true
-
 # Enable ADB during boot for debugging. (Very unsafe. Remove before public build)
 ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.adb.secure=0 \
@@ -112,6 +127,5 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.debuggable=1 \
    	ro.zygote=zygote64_32
         ro.hardware=hi3650
-
 
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)

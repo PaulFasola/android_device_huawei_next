@@ -24,9 +24,6 @@ ro.wifi.channels=
 ro.board.platform=hi3650
 # ro.build.product is obsolete; use ro.product.device
 ro.build.product=hi3650
-# Do not try to parse description, fingerprint, or thumbprint
-#ro.build.description=deleted
-#ro.build.fingerprint=deleted
 ro.build.characteristics=default
 ro.build.hide=false
 # end build properties
@@ -35,10 +32,6 @@ ro.build.hide=false
 # from device/hisi/hi3650/system.prop
 #
 
-
-#
-# ADDITIONAL_BUILD_PROPERTIES
-#
 ro.config.ringtone=Huawei_Tune_Orchestral.ogg
 ro.config.notification_sound=Bongo.ogg
 ro.carrier=unknown
@@ -54,10 +47,7 @@ dalvik.vm.isa.arm.features=default
 net.bt.name=Android
 dalvik.vm.stack-trace-file=/data/anr/traces.txt
 ro.expect.recovery_id=
-
 ro.config.fm_type=libbcmfm_if
-
-
 persist.radio.apm_sim_not_pwdn=1
 persist.service.tm2.tofile=true
 persist.sys.dualcards=true
@@ -77,23 +67,12 @@ ro.ril.ecclist=112,911,#911,*911
 ro.check.modem_network=true
 ro.config.ipv4.mtu=1400
 gsm.fastdormancy.mode=3
+
 ro.config.hw_hotswap_on=true
-
-
-
-
-
-
-
-
-
 ro.config.hw_showTestInfo=true
-
 ro.config.app_big_icon_size=161
 ro.config.launcher_matchcard=0
-
 ro.config.hwft_PinPukUnlockscr=true
-
 ro.config.bg_call_twinking=true
 ro.config.carkitmodenotif=true
 ro.config.protocol_errors=false
@@ -127,11 +106,8 @@ ro.config.fp_navigation=true
 ro.config.conn_diagnose=true
 
 ro.cust.cdrom=/system/cdrom/autorun.iso
-
 ro.hwcamera.use.videosize.1080p=true
-
 ro.config.ringtone2=Huawei_Tune.ogg
-
 ro.config.finger_joint=true
 ro.huawei.multiwindow=true
 ro.config.mm_socket_ctrl=1
@@ -145,7 +121,6 @@ ro.config.widevine_level3=true
 drm.service.enabled=true
 
 ro.com.google.clientidbase=android-huawei
-
 ro.config.hw_allow_ums_and_mtp=true
 ro.config.incall_notify_mms=true
 ro.config.huawei_smallwindow=17,18,1064,1330
@@ -157,30 +132,21 @@ ro.build.hide.matchers=NXT;nxt;hi3650;huawei;mali-t880
 ro.build.hide.replacements=X100;X100;X100;unknown;unknown;
 ro.build.hide.settings=8;1.8 GHz;2.0GB;11.00 GB;16.00 GB;1080 x 720;4.4;3.10.30;3.0
 
-
-
 ro.product.brand=HUAWEI
-
 ro.product.device=next
-
 ro.build.tags=release-keys
-
 ro.build.display.id=NXT-C900B162
-
 ro.build.version.incremental=C900B162
-
 ro.product.board=NXT
-
 ro.product.name=NXT
-
 ro.build.id=HUAWEINXT
-
 ro.confg.hw_systemversion=NXT-C900B162_SYSTEM
-
-
 persist.service.adb.enable=1                                                    
 persist.service.debuggable=1
 persist.sys.usb.config=mtp,adb
 ro.adb.secure=0
 ro.secure=0
 
+qemu.hw.mainkeys=0
+ro.show.navigationbar=0
+ro.sf.lcd_density=300
