@@ -1,5 +1,4 @@
 on post-fs-data
-
     mkdir /data/gps 775 system system
     mkdir /data/gps/log 770
 

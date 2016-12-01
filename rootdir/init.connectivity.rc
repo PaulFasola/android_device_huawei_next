@@ -1,14 +1,13 @@
-import /init.connectivity.${ro.connectivity.sub_chiptype}.rc
-
+import /init.connectivity.bcm43455.rc
 import /init.connectivity.gps.rc
 
 on post-fs-data
-	mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi 0770 wifi wifi
     chown wifi wifi /data/misc/wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     chown wifi wifi /data/misc/wifi/p2p_supplicant.conf
     chmod 0660 /data/misc/wifi/p2p_supplicant.conf
-	mkdir /data/misc/dhcp 0770 dhcp dhcp
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
     restorecon_recursive /data/misc/wifi
 

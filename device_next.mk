@@ -6,9 +6,6 @@ $(call inherit-product, build/target/product/full_base_telephony.mk)
 $(call inherit-product, build/target/product/languages_full.mk)
 $(call inherit-product, vendor/huawei/next/BoardConfigVendor.mk)
 $(call inherit-product, build/target/product/core_64_bit.mk)
-$(call inherit-product, build/target/product/core_64_bit.mk)
-
-
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := device/huawei/next/kernel
@@ -36,7 +33,6 @@ PRODUCT_DEVICE := next
 PRODUCT_MANUFACTURER := HUAWEI
 PRODUCT_MODEL := next
 
-
 # Ramdisk
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/rootdir/init.balong_modem.rc:root/init.balong_modem.rc \
@@ -45,7 +41,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/init.connectivity.bcm43455.rc:root/init.connectivity.bcm43455.rc \
 	$(LOCAL_PATH)/rootdir/fstab.hi3650:root/fstab.hi3650 \
 	$(LOCAL_PATH)/rootdir/init.hi3650.rc:root/init.hi3650.rc \
-	$(LOCAL_PATH)/rootdir/init.connectivity.bcm43xx.rc:root/init.connectivity.bcm43xx.rc \
 	$(LOCAL_PATH)/rootdir/init.audio.rc:root/init.audio.rc \
 	$(LOCAL_PATH)/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
 	$(LOCAL_PATH)/rootdir/init.protocol.rc:root/init.protocol.rc \
@@ -77,9 +72,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/bluetooth/auto_pair_devlist.conf:system/etc/bluetooth/auto_pair_devlist.conf \
 	$(LOCAL_PATH)/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
-	$(LOCAl_PATH)/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf
-	$(LOCAl_PATH)/bluetooth/bt_stack_beta.conf:system/etc/bluetooth/bt_stack_beta.conf
+	$(LOCAl_PATH)/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf \
+	$(LOCAl_PATH)/bluetooth/bt_stack_beta.conf:system/etc/bluetooth/bt_stack_beta.conf \
 	$(LOCAl_PATH)/bluetooth/bt_stack_log.conf:system/etc/bluetooth/bt_stack_log.conf
-	$(LOCAl_PATH)/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf
-	$(LOCAl_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
-

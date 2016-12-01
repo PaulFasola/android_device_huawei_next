@@ -10,10 +10,8 @@ on post-fs
 
 on post-fs-data
     mkdir /data/hwzd_logs/3rdcp-log 0775 radio nvram
-
     mkdir /data/nvram/ 0770 root nvram
     mkdir /data/nvram/md_via 0770 root nvram
-
     mkdir /data/pppd_via 0770 radio system
 
 on early-boot
@@ -76,7 +74,7 @@ on early-boot
     chown radio radio /sys/devices/platform/rnic_adapter_interface.0/rnic_adapter
 
 on boot
-    write  /sys/devices/platform/antennafpga.0/ice40bin_download_dir "start"
+    write /sys/devices/platform/antennafpga.0/ice40bin_download_dir "start"
     chown system system /sys/devices/platform/antennafpga.0/ice40bin_scan_fpga_table
 
 service modemlogcat_VIA /system/bin/modemlogcat_via -t /dev/ttySPI1 -c /system/etc/modemConfig/viacbp82d_log.bcfg -p /data/hwzd_logs/cp_log/ -r 30 -n 9

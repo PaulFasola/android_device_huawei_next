@@ -498,7 +498,7 @@ service hdbd /sbin/hdbd --root_seclabel=u:r:su:s0
     class core
     socket hdbd stream 660 system system
     disabled
-#   seclabel u:r:adbd:s0
+   seclabel u:r:adbd:s0
 
 #service hw_ueventd /sbin/hw_ueventd
 #    class main

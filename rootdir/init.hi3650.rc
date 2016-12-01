@@ -82,7 +82,6 @@ on init
     symlink /storage/self/primary /storage/sdcard0
 
     write /sys/block/dm-0/queue/read_ahead_kb 2048
-
     write /sys/module/block2mtd/parameters/block2mtd /dev/block/mmcblk0p7
 
     wait /dev/nve0
@@ -94,7 +93,6 @@ on init
 
     chown radio radio /dev/ttyAMA1
     chmod 0660 /dev/ttyAMA1
-
     chmod 0400 /dev/hisi_teelog
 
     mkdir /dev/frz
@@ -201,8 +199,7 @@ on init
     chmod 0660 /dev/soundtrigger_dma_drv
 
 on fs
-     export LD_SHIM_LIBS /system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libhwuibp.so|lib_hw_ui.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so
-
+    export LD_SHIM_LIBS /system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libhwuibp.so|lib_hw_ui.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so
 
     wait /dev/block/platform/hi_mci.0/by-name/oeminfo
     start oeminfo_nvm
@@ -216,7 +213,6 @@ on fs
     chown radio radio sys/devices/platform/balong_power/state
 
     restorecon_recursive /modem_log
-
     restorecon /splash2
 
     symlink /splash2 /log
@@ -270,7 +266,6 @@ on fs
     restorecon /sys/class/ina231/ina231_1/ina231_value
     restorecon /sys/class/graphics/fb0/amoled_acl
     restorecon /sys/class/graphics/fb0/amoled_hbm
-
     restorecon /sys/class/sensors/ps_sensor/calibrate
     restorecon /sys/class/sensors/ps_sensor/calibrate_timeout
     restorecon /sys/class/sensors/acc_sensor/info
@@ -285,7 +280,6 @@ on fs
     restorecon /sys/class/sensors/mag_sensor/self_test_timeout
     restorecon /sys/class/sensors/airpress_sensor/read_airpress
     restorecon /sys/class/sensors/airpress_sensor/set_calidata
-
     restorecon /sys/kernel/set_hmp_thresholds/policy
     restorecon /sys/class/graphics/fb0/lcd_cabc_mode
     restorecon /sys/class/leds/torch/flash_thermal_protect
@@ -371,8 +365,8 @@ on post-fs-data
 
     symlink /splash2/sim/offlinelogs /data/offlinelogs
 
-    setprop viatel.device.fls  spi.2.ttySPI
-    setprop viatel.device.at   spi.10.ttySPI
+    setprop viatel.device.fls spi.2.ttySPI
+    setprop viatel.device.at spi.10.ttySPI
     setprop viatel.device.data spi.0.ttySPI
     setprop viatel.device.pcv spi.4.ttySPI
     setprop viatel.device.gps spi.5.ttySPI
@@ -471,7 +465,6 @@ on post-fs-data
     chmod 660 /dev/appvcomTLLOG
 
     chown system system /proc/portcfg
-
     chown system system /proc/getslice
 
     setprop camera.dis.flag 2
@@ -489,7 +482,6 @@ on post-fs-data
     chown media media /sys/class/graphics/fb0/effect_ce
 
     setprop persist.sys.kmemleak.debug 0
-
     setprop vold.post_fs_data_done 1
 
 on boot
@@ -990,6 +982,7 @@ on charger
     chown system system /sys/class/hw_power/charger/charge_data/iin_thermal_aux
     chmod 0660 /sys/class/hw_power/charger/charge_data/limit_charging
     chown system system /sys/class/hw_power/charger/charge_data/limit_charging
+   
     start charger_huawei
     start hw_ueventd
     start oeminfo_nvm
@@ -1238,7 +1231,6 @@ on property:ro.hardware.alter=*
 
 service oeminfo_nvm /system/bin/oeminfo_nvm_server
     class core
-    critical
     ioprio rt 4
 
 #service diagserver /system/bin/diagserver
@@ -1263,9 +1255,6 @@ on property:ro.runmode=factory
 
 #on property:bastet.service.enable=true
   #  start bastetd
-
-service jankservice /system/bin/jankservice
-    class late_start
 
 #service preparesdservice /system/bin/vdc volume storagetosd
 #   class main
@@ -1307,34 +1296,34 @@ service modematserver /system/bin/modemlogcat_lte -f hidp
     disabled
     oneshot
 
-#service dumptool /system/bin/dumptool
-#    class late_start
+service dumptool /system/bin/dumptool
+    class late_start
 
 #service hw_cdma_service /system/bin/hw_cdmamodem_service /dev/acm_cdma_log /dev/ttySPI3 /dev/ttySPI1
 #    class main
 #    user root
 #    disabled
 
-#service thermal-daemon /system/bin/thermal-daemon
-#    class main
-#    user system
-#    group system
+service thermal-daemon /system/bin/thermal-daemon
+    class main
+    user system
+    group system
 
-#service limit_current /system/bin/limit_current -l
-#    user system
-#    group system
-#    disabled
+service limit_current /system/bin/limit_current -l
+    user system
+    group system
+    disabled
 
-#service hwpged /system/bin/hwpged
-#    class main
-#    socket MsgHubSock stream 0660 root system
-#    user root
-#    disabled
+service hwpged /system/bin/hwpged
+    class main
+    socket MsgHubSock stream 0660 root system
+    user root
+    disabled
 
-#service chargemonitor /system/bin/chargemonitor
-#    class late_start
-#    user root
-#    group system
+service chargemonitor /system/bin/chargemonitor
+    class late_start
+    user root
+    group system
 
 #service bastetd /system/bin/bastetd
 #    class main
@@ -1349,8 +1338,8 @@ service modematserver /system/bin/modemlogcat_lte -f hidp
 #    group root
 #    disabled
 
-#service charger_huawei /sbin/charger -c
-#   class charger
-#   user root
-#   group graphics
-#   disabled
+service charger_huawei /sbin/charger -c
+   class charger
+   user root
+   group graphics
+   disabled

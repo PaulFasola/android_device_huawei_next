@@ -1,7 +1,5 @@
 on early-init
 
-
-
 on init
     mkdir /cust
     mkdir /splash2
@@ -14,10 +12,7 @@ on early-fs
     start oeminfo_nvm
 
 on fs
-
     mount ext4 /dev/block/platform/hi_mci.0/by-name/cust /cust wait ro nosuid nodev
-
-
 
     wait /dev/block/mmcblk0p35
     chown system system /dev/block/mmcblk0p35
@@ -95,9 +90,6 @@ on post-fs-data
 on early-boot
 
 on boot
-
-
-
 
 
 service atcmdserver  /system/bin/atcmdserver

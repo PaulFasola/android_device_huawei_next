@@ -1,11 +1,8 @@
-: Copyright (C) 2008 The Android Open Source Project
-
-
 on early-init
     setprop ro.connectivity.chiptype "hisi"
     setprop wifi.interface wlan0
     setprop is_hisi_connectivity_chip 1
-	setprop ro.hardware.consumerir "hisi.hi3650"
+    setprop ro.hardware.consumerir "hisi.hi3650"
 
 on post-fs-data
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
@@ -77,7 +74,6 @@ on property:setup_hi110x_modules=success
     start fm_server_hisi
     write /dev/kmsg "fm_server_hisi has started"
 
-
 service wpa_supplicant /system/bin/wpa_supplicant_hisi \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant_hisi.conf \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
@@ -130,5 +126,4 @@ on property:bluetooth.log.file.create=true
    mkdir /data/hwzd_logs/bt
    chown bluetooth bluetooth /data/hwzd_logs/bt
    chmod 775 /data/hwzd_logs/bt
-
    setprop bluetooth.log.file.create false

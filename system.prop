@@ -26,7 +26,7 @@ ro.board.platform=hi3650
 ro.build.product=hi3650
 ro.build.characteristics=default
 ro.build.hide=false
-# end build properties
+
 
 #
 # from device/hisi/hi3650/system.prop
@@ -37,18 +37,19 @@ ro.setupwizard.mode=OPTIONAL
 ro.com.google.gmsversion=6.0_r2
 persist.sys.art.opt.enable=true
 persist.sys.dalvik.vm.lib.2=libart
+
 dalvik.vm.isa.arm64.variant=generic
 dalvik.vm.isa.arm64.features=default
 dalvik.vm.isa.arm.variant=cortex-a15
 dalvik.vm.isa.arm.features=default
-net.bt.name=Android
 dalvik.vm.stack-trace-file=/data/anr/traces.txt
+
 ro.expect.recovery_id=
 ro.config.fm_type=libbcmfm_if
+net.bt.name=Android
 
 persist.radio.apm_sim_not_pwdn=1
 persist.service.tm2.tofile=true
-
 persist.sys.dualcards=true
 
 # Enable USB OTG
@@ -62,6 +63,7 @@ ril.hw_modem0.rssi=-1
 ril.hw_modem1.rssi=-1
 ro.cellbroadcast.emergencyids=0-65534
 ro.config.delay_send_signal=true
+
 ro.config.hw_accesscontrol=true
 ro.config.hw_disable_cops=true
 ro.config.hw_ecclist_nocard=1+110,6+119,8+118
@@ -69,6 +71,7 @@ ro.config.hw_ecclist_withcard=1+110,6+119,8+118
 ro.config.hw_globalEcc=true
 ro.config.hw_useCtrlSocket=true
 ro.config.updatelocation=true
+
 ro.networkstatus.delaytimer=20
 ro.ril.ecclist=112,911,#911,*911
 ro.check.modem_network=true
@@ -91,7 +94,6 @@ ro.config.colorTemperature_K3=true
 ro.config.hw_glovemode_enabled=1
 ro.config.readBtAddress=true
 ro.config.show2846=true
-
 ro.config.hw_enable_merge=true
 ro.config.hw_gps_power_track=true
 ro.config.hw_smartcardservice=true
@@ -108,7 +110,6 @@ ro.config.hw_wifipro_enable=true
 ro.config.signalplus.tas=true
 ro.config.signalplus.xpass=true
 
-ro.systemui.debug=true
 ro.config.fp_navigation=true
 ro.config.conn_diagnose=true
 
@@ -146,11 +147,8 @@ ro.product.board=NXT
 ro.product.name=NXT
 ro.build.id=HUAWEINXT
 ro.confg.hw_systemversion=NXT-C900B162_SYSTEM
-persist.service.adb.enable=1                                                    
-persist.service.debuggable=1
-persist.sys.usb.config=mtp,adb
-ro.adb.secure=0
-ro.secure=0
+
+config.disable_bluetooth=false
 
 qemu.hw.mainkeys=0
 ro.show.navigationbar=0

@@ -106,10 +106,6 @@ on boot
     chown system system /dev/haptics
     chown system system /sys/class/timed_output/vibrator/haptic_test
 
-
-
-
-
 service device-monitor /system/bin/device_monitor
      class main
      user root
