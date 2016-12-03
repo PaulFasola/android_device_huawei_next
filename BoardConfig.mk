@@ -62,12 +62,6 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 26935820288
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-# RIL
-COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
-BOARD_RIL_CLASS := ../../../device/huawei/next/ril
-PROTOBUF_SUPPORTED := true
-TARGET_RIL_VARIANT := proprietary
-
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun/file"
 
@@ -88,8 +82,7 @@ ENABLE_WEBGL := true
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := true
 
-# Wifi
-TARGET_USES_64_BIT_BCMDHD	 := true
+# Wifi - 4345 is used here (instead of 4344
 BOARD_WLAN_DEVICE                := bcmdhd
 BOARD_WLAN_DEVICE_REV            := bcm4345
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
@@ -98,10 +91,12 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm43455_apsta_hw.bin"
-WIFI_DRIVER_FW_PATH_P2P          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
-WIFI_BAND := 802_11_ABG
+WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm4345_hw.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm4345_apsta_hw.bin"
+WIFI_DRIVER_MODULE_NAME          := "dhd"
+WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/vendor/firmware/fw_bcm43455_hw.bin nvram_path=/system/vendor/firmware/nvram43455_hw.txt"
+WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/vendor/firmware/fw_bcm43455_apsta_hw.bin nvram_path=/system/vendor/firmware/nvram43455_hw.txt"
+WIFI_BAND                        := 802_11_ABG
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -122,16 +117,7 @@ TW_EXTERNAL_STORAGE_PATH := "/sdcard"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "/sdcard"
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd_backlight0/brightness"
 TW_MAX_BRIGHTNESS := 255
-TW_INCLUDE_CRYPTO := true
-TW_CRYPTO_FS_TYPE := "ext4"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/hi_mci.0/by-name/userdata"
-TW_CRYPTO_MNT_POINT := "/data"
-TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,noauto_da_alloc,journal_async_commit,errors=panic    wait,check"
-TW_CRYPTO_FS_FLAGS := "0x00000406"
-TW_CRYPTO_KEY_LOC := "footer"
-TW_USE_TOOLBOX := true
-TW_EXCLUDE_SUPERSU := false
-TW_EXTRA_LANGUAGES := true
+
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
