@@ -6,7 +6,7 @@ USE_CAMERA_STUB := true
 TARGET_PROVIDES_INIT_RC := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := hi3650,next,nxt,NXT,NXT-L29
+TARGET_OTA_ASSERT_DEVICE := hi3650,HWNXT,next,nxt,NXT,NXT-L29
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -110,9 +110,11 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # Recovery
-#RECOVERY_VARIANT := twrp
+RECOVERY_VARIANT := #twrp
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
+# TWRP
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.fstab
 DEVICE_RESOLUTION := 1080x1920
 TW_THEME := portrait_hdpi
 TW_CUSTOM_BATTERY_PATH := "/sys/devices/battery.5/power_supply/Battery"
