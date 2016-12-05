@@ -152,4 +152,4 @@ config.disable_bluetooth=false
 
 qemu.hw.mainkeys=0
 ro.show.navigationbar=0
-ro.sf.lcd_density=360
+ro.sf.lcd_density=480
