@@ -5,6 +5,9 @@ USE_CAMERA_STUB := true
 
 TARGET_PROVIDES_INIT_RC := true
 
+# Assert
+TARGET_OTA_ASSERT_DEVICE := hi3650,next,nxt,NXT,NXT-L29
+
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := hi3650
@@ -79,8 +82,12 @@ USE_OPENGL_RENDERER := true
 ENABLE_WEBGL := true
 
 # Audio
-BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := true
+
+# RIL
+#BOARD_PROVIDES_LIBRIL := true
+#BOARD_RIL_CLASS := ../../../$(DEVICE_PATH)/ril/
+#TARGET_RIL_VARIANT := caf
 
 # Wifi - 4345 is used here (instead of 4344
 BOARD_WLAN_DEVICE                := bcmdhd
@@ -91,8 +98,8 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm4345_hw.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm4345_apsta_hw.bin"
+WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm43455_apsta_hw.bin"
 WIFI_DRIVER_MODULE_NAME          := "dhd"
 WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/vendor/firmware/fw_bcm43455_hw.bin nvram_path=/system/vendor/firmware/nvram43455_hw.txt"
 WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/vendor/firmware/fw_bcm43455_apsta_hw.bin nvram_path=/system/vendor/firmware/nvram43455_hw.txt"
@@ -100,12 +107,12 @@ WIFI_BAND                        := 802_11_ABG
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # Recovery
+#RECOVERY_VARIANT := twrp
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := device/huawei/next/recovery/twrp.fstab
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
 DEVICE_RESOLUTION := 1080x1920
 TW_THEME := portrait_hdpi
 TW_CUSTOM_BATTERY_PATH := "/sys/devices/battery.5/power_supply/Battery"
