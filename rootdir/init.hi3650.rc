@@ -66,20 +66,8 @@ on init
     mkdir /mnvm2:0/SC 0755 root root
     mkdir /mnvm2:0/modem_nv 0755 root root
 
-    mkdir /mnt/shell 0700 shell shell
-    mkdir /mnt/shell/emulated 0700 shell shell
-
-    symlink /mnt/shell/emulated/0 /storage/emulated/0
-
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0700 root root
- 
-    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
-    mkdir /storage/usbotg 0700 root root
-
     symlink /sdcard /mnt/sdcard
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/self/primary /storage/sdcard0
+    symlink /sdcard /storage/sdcard0
 
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/module/block2mtd/parameters/block2mtd /dev/block/mmcblk0p7
@@ -199,7 +187,7 @@ on init
     chmod 0660 /dev/soundtrigger_dma_drv
 
 on fs
-    export LD_SHIM_LIBS /system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libhwuibp.so|lib_hw_ui.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so
+    export LD_SHIM_LIBS /system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libhwuibp.so|lib_hw_ui.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so
 
     wait /dev/block/platform/hi_mci.0/by-name/oeminfo
     start oeminfo_nvm
@@ -284,8 +272,6 @@ on fs
     restorecon /sys/class/graphics/fb0/lcd_cabc_mode
     restorecon /sys/class/leds/torch/flash_thermal_protect
     restorecon /sys/class/timed_output/vibrator/vibrator_calib
-
-    setprop ro.crypto.fuse_sdcard true
 
 on post-fs
     chown system system /proc/uid_cputime/show_uid_stat
@@ -905,22 +891,15 @@ on boot
     chmod 0660 /sys/class/hw_power/charger/charge_data/vr_charger_type
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/msg_policy
 
-on restart-sdcardfs
-    mkdir /data/media 0770 media_rw media_rw    
-    chown media_rw media_rw /data/media
-    mount sdcardfs /data/media /mnt/shell/emulated nosuid nodev derive=legacy,reserved_mb=20
-
 on property:vold.decrypt=trigger_reset_main
     class_reset main
     class_reset late_start
     setprop vold.crypto_support_innersd 1
     
 on property:vold.decrypt=trigger_restart_min_framework
-    trigger restart-sdcardfs
     trigger start_main_class
     
 on property:vold.decrypt=trigger_restart_framework
-    trigger restart-sdcardfs
     trigger start_main_class
     trigger start_latestart_class
     trigger start_other_action
@@ -956,18 +935,6 @@ on data_ready
 on data_not_ready
     setprop sys.userdata_is_ready 0
     write /proc/post-fs-data 0
-
-service fuse_sdcard1rw /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
-   class late_start
-   disabled
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-   class late_start
-   disabled
-
-service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1015 -d /mnt/media_rw/usbotg /storage/usbotg
-   class late_start
-   disabled
 
 on charger
     mount_all fstab.hi3650
@@ -1165,10 +1132,10 @@ service modemlogcat_VIA /system/bin/modemlogcat_via -t /dev/ttySPI1 -c /system/e
     disabled
     oneshot
 
-#service perfhub /system/bin/perfhub
-#    class core
-#    user system
-#    group system
+service perfhub /system/bin/perfhub
+    class core
+    user system
+    group system
 
 on property:persist.sys.huawei.debug.on=0
     chown system system /sys/class/sensors/sensorhub_dump
@@ -1225,18 +1192,18 @@ on property:ro.multi.rild=false
 on property:ro.hardware.alter=*
     write /proc/sys/kernel/hardware_alter ${ro.hardware.alter}
 
-#service atcmdserver  /system/bin/atcmdserver
-#    class main
-#    disabled
+service atcmdserver  /system/bin/atcmdserver
+    class main
+    disabled
 
 service oeminfo_nvm /system/bin/oeminfo_nvm_server
     class core
     ioprio rt 4
 
-#service diagserver /system/bin/diagserver
-#    class main
-#    user root
-#    disabled
+service diagserver /system/bin/diagserver
+    class main
+    user root
+    disabled
 
 on property:ro.runmode=factory
     chmod 0775 /data/media/0/Music
@@ -1245,21 +1212,21 @@ on property:ro.runmode=factory
     chown media_rw media_rw /data/media/0/Music
     chown media_rw media_rw /data/media/0/Pictures
 
-#service hwnffserver  /system/bin/hwnffserver
-#    class main
-#    socket hwnff stream 0660 root mount
+service hwnffserver  /system/bin/hwnffserver
+    class main
+    socket hwnff stream 0660 root mount
 
-#service data_cleanner /system/bin/data_cleaner
-#    class core
-#    oneshot
+service data_cleanner /system/bin/data_cleaner
+    class core
+    oneshot
 
 #on property:bastet.service.enable=true
   #  start bastetd
 
-#service preparesdservice /system/bin/vdc volume storagetosd
-#   class main
-#   disabled
-#   oneshot
+service preparesdservice /system/bin/vdc volume storagetosd
+   class main
+   disabled
+   oneshot
 
 on property:persist.sys.primarysd=*
    start preparesdservice
@@ -1299,10 +1266,10 @@ service modematserver /system/bin/modemlogcat_lte -f hidp
 service dumptool /system/bin/dumptool
     class late_start
 
-#service hw_cdma_service /system/bin/hw_cdmamodem_service /dev/acm_cdma_log /dev/ttySPI3 /dev/ttySPI1
-#    class main
-#    user root
-#    disabled
+service hw_cdma_service /system/bin/hw_cdmamodem_service /dev/acm_cdma_log /dev/ttySPI3 /dev/ttySPI1
+    class main
+    user root
+    disabled
 
 service thermal-daemon /system/bin/thermal-daemon
     class main
@@ -1318,26 +1285,24 @@ service hwpged /system/bin/hwpged
     class main
     socket MsgHubSock stream 0660 root system
     user root
-    disabled
 
 service chargemonitor /system/bin/chargemonitor
     class late_start
     user root
     group system
 
-#service bastetd /system/bin/bastetd
-#    class main
-#    user root
-#    group root
-#    disabled
+service bastetd /system/bin/bastetd
+     class main
+     user root
+     group root
+     disabled
 
-#service teecd /system/bin/teecd
-#    socket tee-multi-user stream 660 root system
-#    class core
-#    user root
-#    group root
-#    disabled
-
+service teecd /system/bin/teecd
+    socket tee-multi-user stream 660 root system
+    class core
+    user root
+    group root
+ 
 service charger_huawei /sbin/charger -c
    class charger
    user root

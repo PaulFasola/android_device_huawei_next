@@ -23,6 +23,6 @@
 /dev/block/platform/hi_mci.0/by-name/boot               /boot           emmc    defaults                                                                                  recoveryonly
 /dev/block/platform/hi_mci.0/by-name/recovery           /recovery       emmc    defaults                                                                                  recoveryonly
 
-/devices/hi_mci.1/mmc_host/mmc1/*                       auto            auto    defaults									          voldmanaged=sdcard:auto,noemulatedsd
-/devices/ff200000.hisi_usb/ff100000.dwc3/*              auto            auto    defaults									          voldmanaged=usb:auto
+/devices/hi_mci.1/mmc_host/mmc1/*                       auto            auto    defaults									          wait,voldmanaged=sdcard:auto,noemulatedsd
+/devices/ff200000.hisi_usb/ff100000.dwc3/*              auto            auto    defaults									          wait,voldmanaged=usb:auto
 
