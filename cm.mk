@@ -17,7 +17,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.debuggable=1 \
 	persist.sys.usb.config=mtp \
 	persist.logd.logpersistd=logcatd \
-        ro.hardware=hi3650
+        ro.hardware=hi3650 \
+        persist.sys.isUsbOtgEnabled=true
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := next

@@ -20,10 +20,10 @@ PRODUCT_PACKAGES += libshim_general \
                     libshim_log
 
 # Screen density
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_AAPT_CONFIG := normal xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-# Boot animation
+# Screen size
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
