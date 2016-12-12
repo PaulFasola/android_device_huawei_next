@@ -11,10 +11,7 @@ $(call inherit-product, device/huawei/next/device_next.mk)
 # .PROP OVERRIDE
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
-	ro.adb.secure=0 \
-	ro.secure=0 \
 	ro.allow.mock.location=1 \
-	ro.debuggable=1 \
 	persist.sys.usb.config=mtp \
 	persist.logd.logpersistd=logcatd \
         ro.hardware=hi3650 \
