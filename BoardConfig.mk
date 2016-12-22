@@ -3,14 +3,16 @@ LOCAL_PATH := device/huawei/next
 
 USE_CAMERA_STUB := true
 
+TARGET_PROVIDES_LIBLIGHT := true
 TARGET_PROVIDES_INIT_RC := true
+ENABLE_CPUSETS := true
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := hi3650,HWNXT,next,nxt,NXT,NXT-L29
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := hi3650
+TARGET_BOOTLOADER_BOARD_NAME := hisi
 
 # Architecture
 TARGET_ARCH := arm64
@@ -68,6 +70,12 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun/file"
 
+# SD Card
+BOARD_HAS_SDCARD_INTERNAL := true
+BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
+BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1k1
+BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
+
 # Display
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := false
@@ -83,16 +91,32 @@ BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 ENABLE_WEBGL := true
 
-
 # Audio
 BOARD_USES_ALSA_AUDIO := true
+TARGET_PROVIDES_LIBAUDIO := true
+BOARD_USES_GENERIC_AUDIO := false
+BOARD_SUPPORTS_SOUND_TRIGGER := true
+
+# Camera
+USE_CAMERA_STUB := false
+BOARD_CAMERA_HAVE_ISO := true
+COMMON_GLOBAL_CFLAGS += -DHAVE_ISO
+USE_DEVICE_SPECIFIC_CAMERA := true
 
 # RIL
 #BOARD_PROVIDES_LIBRIL := true
-#BOARD_RIL_CLASS := ../../../$(DEVICE_PATH)/ril/
-#TARGET_RIL_VARIANT := caf
+#BOARD_RIL_CLASS := ../../../device/huawei/next/ril
+#BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+#PROTOBUF_SUPPORTED := true
+#TARGET_RIL_VARIANT := proprietary
+#SIM_COUNT := 2
 
-# Wifi - 4345 is used here (instead of 4344
+# Charger
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+BACKLIGHT_PATH := /sys/class/leds/lcd_backlight0/brightness
+HEALTHD_BACKLIGHT_LEVEL := 100
+
+# Wifi - 4345 is used here (instead of 4344)
 BOARD_WLAN_DEVICE                := bcmdhd
 BOARD_WLAN_DEVICE_REV            := bcm4345
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
@@ -112,9 +136,14 @@ WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_BLUETOOTH := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
+# GPS
+USE_DEVICE_SPECIFIC_GPS := true
+TARGET_NO_RPC := true
+
 # Recovery
 RECOVERY_VARIANT := #twrp
 RECOVERY_FSTAB_VERSION := 2
+
 # TWRP
 #TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.fstab

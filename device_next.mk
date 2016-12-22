@@ -48,11 +48,12 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/init.extmodem.rc:root/init.extmodem.rc \
 	$(LOCAL_PATH)/rootdir/init.performance.rc:root/init.performance.rc \
 	$(LOCAL_PATH)/rootdir/init.hi3650.gps.rc:root/init.hi3650.gps.rc \
+	$(LOCAL_PATH)/rootdir/init.hi3650.power.rc:root/init.hi3650.power.rc \
+	$(LOCAL_PATH)/rootdir/init.hi3650.power.sh:root/init.hi3650.power.sh \
 	$(LOCAL_PATH)/rootdir/init.hi3650.usb.rc:root/init.hi3650.usb.rc \
 	$(LOCAL_PATH)/rootdir/init.tee.rc:root/init.tee.rc \
 	$(LOCAL_PATH)/rootdir/ueventd.hi3650.rc:root/ueventd.hi3650.rc \
 	$(LOCAL_PATH)/rootdir/init.connectivity.hisi.rc:root/init.connectivity.hisi.rc \
-	$(LOCAL_PATH)/rootdir/init.hi3650.power.sh:root/init.hi3650.power.sh \
 	$(LOCAL_PATH)/rootdir/init.manufacture.rc:root/init.manufacture.rc \
 	$(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
 	$(LOCAL_PATH)/rootdir/init.device.rc:root/init.device.rc \
@@ -60,7 +61,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/init.platform.rc:root/init.platform.rc \
 	$(LOCAL_PATH)/rootdir/init.connectivity.gps.rc:root/init.connectivity.gps.rc \
 	$(LOCAL_PATH)/rootdir/init.hisi.rc:root/init.hisi.rc \
-	$(LOCAL_PATH)/rootdir/init.hi3650.power.rc:root/init.hi3650.power.rc \
 	$(LOCAL_PATH)/rootdir/sbin/logctl_service:root/sbin/logctl_service \
 	$(LOCAL_PATH)/rootdir/sbin/teecd:root/sbin/teecd \
 	$(LOCAL_PATH)/rootdir/sbin/check_root:root/sbin/check_root \
@@ -75,3 +75,39 @@ PRODUCT_COPY_FILES += \
 	$(LOCAl_PATH)/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf \
 	$(LOCAl_PATH)/bluetooth/bt_stack_beta.conf:system/etc/bluetooth/bt_stack_beta.conf \
 	$(LOCAl_PATH)/bluetooth/bt_stack_log.conf:system/etc/bluetooth/bt_stack_log.conf
+
+# Audio
+PRODUCT_PACKAGES += \
+    audio.primary.default \
+    audio.a2dp.default \
+    audio.usb.default \
+    audio.r_submix.default \
+    libaudioutils \
+    libaudioroute \
+    libtinyalsa \
+    tinyplay \
+    tinycap \
+    tinymix \
+    tinypcminfo
+
+# Wifi
+PRODUCT_PACKAGES += \
+         hostapd
+
+# Fingerprint
+PRODUCT_PACKAGES += \
+     fingerprint
+
+# Power HAL
+PRODUCT_PACKAGES += \
+    power.hi3650
+
+# KEYPAD
+#PRODUCT_PACKAGES += \
+#    usbaudio.kl
+
+PRODUCT_GMS_CLIENTID_BASE := android-huawei
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril.config=simactivation
+

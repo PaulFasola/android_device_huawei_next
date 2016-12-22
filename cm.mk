@@ -12,7 +12,6 @@ $(call inherit-product, device/huawei/next/device_next.mk)
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.allow.mock.location=1 \
-	persist.sys.usb.config=mtp \
 	persist.logd.logpersistd=logcatd \
         ro.hardware=hi3650 \
         persist.sys.isUsbOtgEnabled=true
@@ -24,8 +23,3 @@ PRODUCT_BRAND := huawei
 PRODUCT_MODEL := next
 PRODUCT_MANUFACTURER := HUAWEI
 
-# Dalvik Heap
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-dalvik-heap.mk)
-
-# HwUI
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
