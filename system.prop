@@ -213,3 +213,5 @@ ro.config.enable_rms=true
 ro.config.small_cover_size=_1047x1312
 ro.com.android.mobiledata=true
 ro.config.hw_power_saving=true
+
+cm.updater.uri=http://ota-updater.paulfasola.fr/api
