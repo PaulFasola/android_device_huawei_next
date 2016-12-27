@@ -52,7 +52,6 @@ on early-boot
     chmod 660 /dev/appvcomERRLOG
     chmod 660 /dev/appvcomLOG
     chmod 660 /dev/appvcomLOG1
-    
     chown radio radio /dev/appvcom
     chown radio radio /dev/appvcom1
     chown radio radio /dev/appvcom5
@@ -65,22 +64,15 @@ on early-boot
     chown radio radio /dev/appvcom21
     chown radio radio /dev/appvcom25
     chown radio radio /dev/appvcom26
-    
     chown media media /dev/appvcom4
     chown media media /dev/appvcom12
-    
     chown system system /dev/appvcom2
     chown system system /dev/appvcom8
     chown system system /dev/appvcom22
-
     chown system system /dev/appvcom17
-
     chown system system /dev/appvcomERRLOG
-
     chown system system /proc/portcfg
-
     chown system system /proc/getslice
-
     chown radio radio sys/devices/platform/balong_power/state
 
     mount pstore pstore /sys/fs/pstore
@@ -91,8 +83,23 @@ on early-boot
 
 on boot
     write /sys/kernel/debug/kmemleak scan=14400
-
     chown radio radio /proc/modemstatus
+
+
+service ril-daemon /system/bin/rild
+    class late_start
+    socket rild stream 660 root radio
+    socket rild-ims stream 660 root radio
+    socket rildm2 stream 660 root radio
+    socket rildm3 stream 660 root radio
+    socket rildc1 stream 660 radio system
+    socket rildc2 stream 660 radio system
+    socket rildc3 stream 660 radio system
+    socket sap_uim_socket1 stream 660 bluetooth bluetooth
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw log system
+    disabled
 
 
 service ril-daemon1 /system/bin/rild -c 1

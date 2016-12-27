@@ -40,6 +40,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/init.connectivity.rc:root/init.connectivity.rc \
 	$(LOCAL_PATH)/rootdir/init.connectivity.bcm43455.rc:root/init.connectivity.bcm43455.rc \
 	$(LOCAL_PATH)/rootdir/fstab.hi3650:root/fstab.hi3650 \
+	$(LOCAL_PATH)/rootdir/init.41038.rc:root/init.41038.rc \
 	$(LOCAL_PATH)/rootdir/init.hi3650.rc:root/init.hi3650.rc \
 	$(LOCAL_PATH)/rootdir/init.audio.rc:root/init.audio.rc \
 	$(LOCAL_PATH)/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
@@ -62,9 +63,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/init.connectivity.gps.rc:root/init.connectivity.gps.rc \
 	$(LOCAL_PATH)/rootdir/init.hisi.rc:root/init.hisi.rc \
 	$(LOCAL_PATH)/rootdir/sbin/logctl_service:root/sbin/logctl_service \
-	$(LOCAL_PATH)/rootdir/sbin/teecd:root/sbin/teecd \
 	$(LOCAL_PATH)/rootdir/sbin/check_root:root/sbin/check_root \
-	$(LOCAL_PATH)/rootdir/sbin/oeminfo_nvm_server:root/sbin/oeminfo_nvm_server \
 	$(LOCAL_PATH)/rootdir/sbin/hw_ueventd:root/sbin/hw_ueventd \
 	$(LOCAL_PATH)/rootdir/sbin/ntfs-3gd:root/sbin/ntfs-3gd
 
@@ -96,7 +95,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-     fingerprint
+     fingerprintd
 
 # Power HAL
 PRODUCT_PACKAGES += \
@@ -111,3 +110,6 @@ PRODUCT_GMS_CLIENTID_BASE := android-huawei
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril.config=simactivation
 
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_FINGERPRINT="HUAWEI/NXT-L29/HWNXT:6.0/HUAWEINXT-L29/C900B182:user/release-keys" \
+    PRIVATE_BUILD_DESC="EVA-L29-user 6.0 HUAWEINXT-L29 C900B182 release-keys"

@@ -110,3 +110,4 @@ service device-monitor /system/bin/device_monitor
      class main
      user root
      group system
+     disabled

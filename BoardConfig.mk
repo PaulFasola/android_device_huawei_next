@@ -86,7 +86,6 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 6
 
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 ANDROID_ENABLE_RENDERSCRIPT := true
-BRIGHTNESS_SYS_FILE := "/sys/devices/platform/hisi_fb.1048577/leds/lcd_backlight0/brightness"
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 ENABLE_WEBGL := true
@@ -114,7 +113,10 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BACKLIGHT_PATH := /sys/class/leds/lcd_backlight0/brightness
-HEALTHD_BACKLIGHT_LEVEL := 100
+RED_LED_PATH := "/sys/class/leds/red/brightness"
+GREEN_LED_PATH := "/sys/class/leds/green/brightnes"
+BLUE_LED_PATH :=  "/sys/class/leds/blue/brightnes"
+HEALTHD_BACKLIGHT_LEVEL := 50
 
 # Wifi - 4345 is used here (instead of 4344)
 BOARD_WLAN_DEVICE                := bcmdhd
