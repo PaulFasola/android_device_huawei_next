@@ -85,7 +85,6 @@ on boot
     write /sys/kernel/debug/kmemleak scan=14400
     chown radio radio /proc/modemstatus
 
-
 service ril-daemon /system/bin/rild
     class late_start
     socket rild stream 660 root radio
@@ -100,7 +99,6 @@ service ril-daemon /system/bin/rild
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw log system
     disabled
-
 
 service ril-daemon1 /system/bin/rild -c 1
     disabled

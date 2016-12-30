@@ -72,9 +72,6 @@ ro.show.navigationbar=0
 ro.sf.lcd_density=380
 hw.lcd.density=380
 
-# Connect and disconnect faster (experimental)
-ro.mot.eri.losalert.delay=1000
-
 # More free ram and apps load faster
 dalvik.vm.dexopt-flags=m=y
 
@@ -84,6 +81,8 @@ pm.sleep_mode=0
 # Reduce dial-out time
 ro.telephony.call_ring.delay=0
 
+# Enable Fingersense
+persist.sys.fingersense=1
 
 # RIL
 # For modem_id 3C002C00 only

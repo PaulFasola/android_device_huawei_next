@@ -8,7 +8,6 @@ on init
     chmod 0660 /dev/hwlog_switch
     chown logd system /dev/hwlog_switch
 
-
     mkdir /sys/fs/cgroup/pids 0750 root system
     mount cgroup none /sys/fs/cgroup/pids pids
     mkdir /sys/fs/cgroup/pids/unconfirm_app 0750 root system
@@ -25,8 +24,8 @@ on init
 on early-fs
 
 on fs
-    restorecon       /sys/class/graphics/fb0/lcd_cabc_mode
-    restorecon       /sys/class/leds/torch/flash_thermal_protect
+    restorecon /sys/class/graphics/fb0/lcd_cabc_mode
+    restorecon /sys/class/leds/torch/flash_thermal_protect
 
 on post-fs
     sys_wp_init_action
@@ -132,6 +131,7 @@ on property:vold.decrypt=trigger_default_encryption
 
 on property:vold.decrypt=trigger_shutdown_framework
     trigger data_not_ready
+
 on start_main_class
     class_start main
 
@@ -161,7 +161,6 @@ on data_not_ready
     setprop sys.userdata_is_ready 0
     write /proc/post-fs-data 0
 
-
 on property:bastet.service.enable=true
     start bastetd
 
@@ -174,7 +173,6 @@ service systeminfo /system/bin/systeminfo
     seclabel u:r:systeminfo:s0
     disabled
     oneshot	
-
 
 service fuse_sdcard1rw /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
    class late_start
@@ -309,9 +307,9 @@ service modematserver /system/bin/modemlogcat_lte -f hidp
     disabled
     oneshot
 
-service dumptool /system/bin/dumptool
-    class late_start
-    seclabel u:r:logserver:s0
+#service dumptool /system/bin/dumptool
+#    class late_start
+#    seclabel u:r:logserver:s0
 
 service hw_cdma_service /system/bin/hw_cdmamodem_service /dev/acm_cdma_log /dev/ttySPI3 /dev/ttySPI1
     class main
@@ -349,11 +347,11 @@ service powerlogd /system/bin/powerlogd
     socket powerlogdr seqpacket 0600 system system
     socket powerlogdw dgram 0220 system system
 
-service chargemonitor /system/bin/chargemonitor
-    class late_start
-    user root
-    group system
-    seclabel u:r:hisilogcat:s0
+#service chargemonitor /system/bin/chargemonitor
+#    class late_start
+#    user root
+#    group system
+#    seclabel u:r:hisilogcat:s0
 
 on property:debug.rt.ddr.test=1
     stop ddrtest

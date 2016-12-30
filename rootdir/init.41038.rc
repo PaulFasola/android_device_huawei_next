@@ -13,10 +13,10 @@ on post-fs-data
 	chown nfc nfc /data/nfc
 
 on early-boot
-	service HwCamCfgSvr /system/bin/HwCamCfgSvr hi3650 NEXT
-	class main
-	user media
-	group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm system dsm
+	#service HwCamCfgSvr /system/bin/HwCamCfgSvr hi3650 NEXT
+	#class main
+	#user media
+	#group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm system dsm
 
 on early-boot
 	service tui-daemon /system/bin/tui_daemon

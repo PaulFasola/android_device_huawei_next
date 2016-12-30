@@ -32,27 +32,20 @@ on boot
     chown root system /proc/gps/nstandby
     chmod 0664 /proc/gps/nstandby
 
-    service gpsdaemon /system/bin/gpsdaemon
-    class main
-    oneshot
+#    service gpsdaemon /system/bin/gpsdaemon
+#    class main
+#    oneshot
 
-    service gpsd_47531  /system/bin/glgps47531 -c /data/gps/gpsconfig.xml
-    socket gps seqpacket 660 gps system
-    class main
-    user gps
-    group system inet sdcard_rw
-    disabled
+#    service gpsd_47531  /system/bin/glgps47531 -c /data/gps/gpsconfig.xml
+#    socket gps seqpacket 660 gps system
+#    class main
+#    user gps
+#    group system inet sdcard_rw
+#    disabled
 
-    service gpsdcl_47531  /system/bin/glgps47531cl -c /data/gps/gpsconfig.xml
-    socket gps seqpacket 660 gps system
-    class main
-    user gps
-    group system inet sdcard_rw
-    disabled
-
-    service ipld /system/bin/inv_ipld  /system/etc/inv_ipld_beta.prop
-    class main
-    user system
-    group system
-    disabled
+#    service ipld /system/bin/inv_ipld  /system/etc/inv_ipld_beta.prop
+#    class main
+#    user system
+#    group system
+#    disabled
 

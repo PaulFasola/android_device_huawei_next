@@ -101,10 +101,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.hi3650
 
-# KEYPAD
-#PRODUCT_PACKAGES += \
-#    usbaudio.kl
-
 PRODUCT_GMS_CLIENTID_BASE := android-huawei
 
 PRODUCT_PROPERTY_OVERRIDES += \

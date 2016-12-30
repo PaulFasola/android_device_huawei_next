@@ -48,9 +48,6 @@ on early-boot
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root
 
-    #symlink /sdcard /mnt/sdcard
-    #symlink /storage/self/primary /storage/sdcard0
-
     mkdir /mnt/media_rw 0750 media_rw media_rw
     mkdir /data/samba 0755 media_rw media_rw
 
@@ -182,9 +179,7 @@ on init
     chown system system /sys/kernel/perfhub/cpuaffinity
     chmod 0660 /sys/kernel/perfhub/cpuaffinity
 
-
     write /sys/class/devfreq/gpufreq/min_freq 360000000
-
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 806400
 
     write /proc/sys/kernel/hung_task_panic 1
@@ -267,12 +262,13 @@ on property:persist.sys.smart_power=4 && property:sys.boot_completed=1
 on property:persist.sys.fingersense=1
     write /sys/devices/platform/huawei_sensor/set_fingersense_enable 1
     write /sys/devices/platform/huawei_touch/roi_enable 1
+
 on property:persist.sys.fingersense=0
     write /sys/devices/platform/huawei_sensor/set_fingersense_enable 0
     write /sys/devices/platform/huawei_touch/roi_enable 0
 
 on charger
-    mount_all /fstab.${ro.hardware}
+    mount_all /fstab.hi3650
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
     restorecon_recursive /sys/devices/system/cpu/cpu0/cpufreq/interactive
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 806000
@@ -301,7 +297,7 @@ on charger
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
 
 on fs
-    export LD_SHIM_LIBS /system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libhwuibp.so|lib_hw_ui.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so
+    export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so
 
     wait /dev/block/platform/hi_mci.0/by-name/oeminfo
     start oeminfo_nvm
@@ -416,6 +412,11 @@ on early-boot
     socket vr_daemon stream 660 root system graphics
 
 on boot
+    write /proc/sys/kernel/hung_task_panic 1
+    write /proc/sys/kernel/hung_task_timeout_secs 120
+    write /sys/kernel/hungtask/monitorlist "whitelist,system_server,surfaceflinger"
+    write /sys/kernel/hungtask/enable "on"
+
     chown system system /sys/class/leds/torch/brightness
     chmod 664 /sys/class/leds/torch/brightness
     restorecon /sys/class/leds/torch/brightness
@@ -453,18 +454,18 @@ on boot
     chmod 0664 /sys/nfc/nfc_fwupdate
     chown nfc nfc /sys/nfc/nxp_config_name
     chmod 0664 /sys/nfc/nxp_config_name
-chown nfc nfc /sys/nfc/nfc_brcm_conf_name
-chmod 0664 /sys/nfc/nfc_brcm_conf_name
-	chown nfc nfc /sys/nfc/nfc_sim_switch
-	chmod 0664 /sys/nfc/nfc_sim_switch
-	chown nfc nfc /sys/nfc/nfc_sim_status
-	chmod 0444 /sys/nfc/nfc_sim_status
-	chown nfc nfc /sys/nfc/rd_nfc_sim_status
-	chmod 0444 /sys/nfc/rd_nfc_sim_status
-	chown nfc nfc /sys/nfc/nfc_enable_status
-	chmod 0664 /sys/nfc/nfc_enable_status
-	chown nfc nfc /sys/nfc/nfcservice_lock
-	chmod 0664 /sys/nfc/nfcservice_lock
+    chown nfc nfc /sys/nfc/nfc_brcm_conf_name
+    chmod 0664 /sys/nfc/nfc_brcm_conf_name
+    chown nfc nfc /sys/nfc/nfc_sim_switch
+    chmod 0664 /sys/nfc/nfc_sim_switch
+    chown nfc nfc /sys/nfc/nfc_sim_status
+    chmod 0444 /sys/nfc/nfc_sim_status
+    chown nfc nfc /sys/nfc/rd_nfc_sim_status
+    chmod 0444 /sys/nfc/rd_nfc_sim_status
+    chown nfc nfc /sys/nfc/nfc_enable_status
+    chmod 0664 /sys/nfc/nfc_enable_status
+    chown nfc nfc /sys/nfc/nfcservice_lock
+    chmod 0664 /sys/nfc/nfcservice_lock
 
     mkdir -p /lib/firmware/ 0666 root root
     chown media media /system/vendor/firmware/isp_fw.elf
@@ -474,25 +475,25 @@ chmod 0664 /sys/nfc/nfc_brcm_conf_name
     symlink /system/vendor/firmware/isp_fw.elf /lib/firmware/isp_fw.elf
     symlink /system/vendor/firmware/isp_bw.elf /lib/firmware/isp_bw.elf
 
-	chown system system /dev/sensorhub
-	chmod 0660 /dev/sensorhub
-	chown system system /dev/motionhub
-	chmod 0660 /dev/motionhub
-	chown system system /sys/devices/platform/huawei_sensor/acc_info
-	chown system system /sys/devices/platform/huawei_sensor/mag_info
-	chown system system /sys/devices/platform/huawei_sensor/gyro_info
-	chown system system /sys/devices/platform/huawei_sensor/als_info
-	chown system system /sys/devices/platform/huawei_sensor/ps_info
-	chown system system /sys/devices/platform/huawei_sensor/gyro_selfTest
-	chown system system /sys/devices/platform/huawei_sensor/mag_selfTest
-	chown system system /sys/devices/platform/huawei_sensor/acc_calibrate
-	chown system system /sys/devices/platform/huawei_sensor/acc_enable
-	chown system system /sys/devices/platform/huawei_sensor/acc_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/acc_selfTest
-	chown system system /sys/devices/platform/huawei_sensor/mag_enable
-	chown system system /sys/devices/platform/huawei_sensor/mag_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/gyro_calibrate
-	chown system system /sys/devices/platform/huawei_sensor/gyro_enable
+   chown system system /dev/sensorhub
+   chmod 0660 /dev/sensorhub
+   chown system system /dev/motionhub
+   chmod 0660 /dev/motionhub
+   chown system system /sys/devices/platform/huawei_sensor/acc_info
+   chown system system /sys/devices/platform/huawei_sensor/mag_info
+   chown system system /sys/devices/platform/huawei_sensor/gyro_info
+   chown system system /sys/devices/platform/huawei_sensor/als_info
+   chown system system /sys/devices/platform/huawei_sensor/ps_info
+   chown system system /sys/devices/platform/huawei_sensor/gyro_selfTest
+   chown system system /sys/devices/platform/huawei_sensor/mag_selfTest
+   chown system system /sys/devices/platform/huawei_sensor/acc_calibrate
+   chown system system /sys/devices/platform/huawei_sensor/acc_enable
+   chown system system /sys/devices/platform/huawei_sensor/acc_setdelay
+   chown system system /sys/devices/platform/huawei_sensor/acc_selfTest
+   chown system system /sys/devices/platform/huawei_sensor/mag_enable
+   chown system system /sys/devices/platform/huawei_sensor/mag_setdelay
+   chown system system /sys/devices/platform/huawei_sensor/gyro_calibrate
+   chown system system /sys/devices/platform/huawei_sensor/gyro_enable
 	chown system system /sys/devices/platform/huawei_sensor/gyro_setdelay
 	chown system system /sys/devices/platform/huawei_sensor/als_calibrate
 	chown system system /sys/devices/platform/huawei_sensor/als_enable
@@ -554,7 +555,7 @@ chmod 0664 /sys/nfc/nfc_brcm_conf_name
 	chown system system /sys/class/sensors/mag_sensor/calibrate_method
 	chown system system /sys/class/sensors/als_sensor/enable
 	chown system system /sys/class/sensors/als_sensor/set_delay
-	chown system system /sys/class/sensors/als_sensor/info
+   chown system system /sys/class/sensors/als_sensor/info
 	chown system system /sys/class/sensors/als_sensor/get_data
 	chown system system /sys/class/sensors/als_sensor/calibrate
 	chown system system /sys/class/sensors/als_sensor/calibrate_timeout
@@ -572,19 +573,19 @@ chmod 0664 /sys/nfc/nfc_brcm_conf_name
 	chown system system /sys/class/sensors/airpress_sensor/set_delay
 	chown system system /sys/class/sensors/airpress_sensor/info
 	chown system system /sys/class/sensors/airpress_sensor/get_data
-	chown system system /sys/class/sensors/airpress_sensor/read_airpress
-	chown system system /sys/class/sensors/airpress_sensor/set_calidata
-	chown system system /sys/class/sensors/fingersense_sensor/set_fingersense_enable
-	chown system system /sys/class/sensors/fingersense_sensor/fingersense_data_ready
-	chown system system /sys/class/sensors/fingersense_sensor/fingersense_latch_data
-	chown system system /sys/class/sensors/fingersense_sensor/fingersense_req_data
-    chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
-    chmod 660 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
-    chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
-    chmod 444 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
-    chown system system /dev/block/mmcblk0p26
-    chmod 660 /dev/block/mmcblk0p26
-    chown system system /sys/class/sensors/libsensor_ver
+   chown system system /sys/class/sensors/airpress_sensor/read_airpress
+   chown system system /sys/class/sensors/airpress_sensor/set_calidata
+   chown system system /sys/class/sensors/fingersense_sensor/set_fingersense_enable
+   chown system system /sys/class/sensors/fingersense_sensor/fingersense_data_ready
+   chown system system /sys/class/sensors/fingersense_sensor/fingersense_latch_data
+   chown system system /sys/class/sensors/fingersense_sensor/fingersense_req_data
+   chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
+   chmod 660 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
+   chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
+   chmod 444 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
+   chown system system /dev/block/mmcblk0p26
+   chmod 660 /dev/block/mmcblk0p26
+   chown system system /sys/class/sensors/libsensor_ver
 
     chown system system /sys/devices/platform/huawei_sensor/set_fingersense_enable
     chmod 0660 /sys/devices/platform/huawei_sensor/set_fingersense_enable
@@ -594,33 +595,36 @@ chmod 0664 /sys/nfc/nfc_brcm_conf_name
     chmod 0440 /sys/devices/platform/huawei_sensor/fingersense_data_ready
     chown system system /sys/devices/platform/huawei_sensor/fingersense_latch_data
     chmod 0440 /sys/devices/platform/huawei_sensor/fingersense_latch_data
-	chown system system /sys/class/hall/hall/state
-        chown system system /sys/class/hall/hall/report
-        chown system system /sys/class/hall/hall/info
-        chown system system /sys/class/hall/hall/count
-        chown system system /sys/class/hall/hall/enable
-        chown system system /sys/class/hall/hall/flag
-        chown system system /sys/class/hall/hall/period
-        chown system system /sys/class/hall/hall/report_count
-        chown system system /sys/class/hall/hall/value
+    chown system system /sys/class/hall/hall/state
+    chown system system /sys/class/hall/hall/report
+    chown system system /sys/class/hall/hall/info
+    chown system system /sys/class/hall/hall/count
+    chown system system /sys/class/hall/hall/enable
+    chown system system /sys/class/hall/hall/flag
+    chown system system /sys/class/hall/hall/period
+    chown system system /sys/class/hall/hall/report_count
+    chown system system /sys/class/hall/hall/value
 
     chmod 770 /proc/hifidsp/hifi
     chown root audio /proc/hifidsp/hifi
 
-
-     write /proc/sys/net/core/rps_sock_flow_entries 0
-     write /sys/class/net/rmnet0/queues/rx-0/rps_flow_cnt 0
-     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus e
-     write /sys/class/net/rmnet1/queues/rx-0/rps_flow_cnt 0
-     write /sys/class/net/rmnet1/queues/rx-0/rps_cpus e
-     write /sys/class/net/rmnet2/queues/rx-0/rps_flow_cnt 0
-     write /sys/class/net/rmnet2/queues/rx-0/rps_cpus e
-     write /sys/class/net/rmnet3/queues/rx-0/rps_flow_cnt 0
-     write /sys/class/net/rmnet3/queues/rx-0/rps_cpus e
-     write /sys/class/net/rmnet4/queues/rx-0/rps_flow_cnt 0
-     write /sys/class/net/rmnet4/queues/rx-0/rps_cpus e
-     write /sys/class/net/rmnet_ims/queues/rx-0/rps_flow_cnt 0
-     write /sys/class/net/rmnet_ims/queues/rx-0/rps_cpus e
+    write /proc/sys/net/core/rps_sock_flow_entries 0
+    write /sys/class/net/rmnet0/queues/rx-0/rps_flow_cnt 0
+    write /sys/class/net/rmnet0/queues/rx-0/rps_cpus e
+    write /sys/class/net/rmnet1/queues/rx-0/rps_flow_cnt 0
+    write /sys/class/net/rmnet1/queues/rx-0/rps_cpus e
+    write /sys/class/net/rmnet2/queues/rx-0/rps_flow_cnt 0
+    write /sys/class/net/rmnet2/queues/rx-0/rps_cpus e
+    write /sys/class/net/rmnet3/queues/rx-0/rps_flow_cnt 0
+    write /sys/class/net/rmnet3/queues/rx-0/rps_cpus e
+    write /sys/class/net/rmnet4/queues/rx-0/rps_flow_cnt 0
+    write /sys/class/net/rmnet4/queues/rx-0/rps_cpus e
+    write /sys/class/net/rmnet_ims/queues/rx-0/rps_flow_cnt 0
+    write /sys/class/net/rmnet_ims/queues/rx-0/rps_cpus e
+    write /proc/sys/kernel/hung_task_panic 1
+    write /proc/sys/kernel/hung_task_timeout_secs 120
+    write /sys/kernel/hungtask/monitorlist "whitelist,system_server,surfaceflinger"
+    write /sys/kernel/hungtask/enable "on"
 
 on property:ro.runmode=*
     start telemntncat
@@ -712,17 +716,17 @@ service kmsgcat_cp /sbin/kmsgcat -r 4096 -n 25 -i /dev/cshell_log -f /data/hwzd_
 service defragd /system/bin/defragd
     class late_start
 
-service perfhub /system/bin/perfhub
-    class core
-    user system
-    group system
+#service perfhub /system/bin/perfhub
+#    class core
+#    user system
+#    group system
+#    disabled
 
 on property:service.bootanim.exit=1
     write /sys/class/devfreq/ddrfreq/max_freq 1333000000
     write /sys/class/devfreq/ddrfreq/min_freq 1333000000
     write /sys/class/devfreq/ddrfreq/min_freq 0
     write /sys/class/devfreq/ddrfreq/max_freq 0
-
     write /sys/class/devfreq/ddrfreq_up_threshold/max_freq 1333000000
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
 

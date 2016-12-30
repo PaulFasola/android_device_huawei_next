@@ -6,7 +6,7 @@
 # Currently we dont have e2fsck compiled. So fs check would failed.
 
 #<src>                                                  <mnt_point>      <type>	 <mnt_flags and options>                                                                   <fs_mgr_flags>
-/dev/block/platform/hi_mci.0/by-name/system             /system          ext4	 ro,barrier=1	                                                                           wait
+/dev/block/platform/hi_mci.0/by-name/system             /system          ext4	 rw,barrier=1	                                                                           wait
 /dev/block/platform/hi_mci.0/by-name/userdata           /data            ext4    rw,nosuid,nodev,noatime,user_xattr,acl,barrier=1,data=ordered,noauto_da_alloc,discard     wait,encryptable=footer,check
 /dev/block/platform/hi_mci.0/by-name/cache              /cache           ext4	 rw,nosuid,nodev,noatime,data=ordered                                                      wait,check,formattable
 

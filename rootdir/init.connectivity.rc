@@ -1,5 +1,5 @@
 import /init.connectivity.bcm43455.rc
-import /init.connectivity.gps.rc
+#import /init.connectivity.gps.rc
 
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
