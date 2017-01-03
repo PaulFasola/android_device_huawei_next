@@ -297,7 +297,7 @@ on charger
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
 
 on fs
-    export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_exif.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so
+    export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so
 
     wait /dev/block/platform/hi_mci.0/by-name/oeminfo
     start oeminfo_nvm

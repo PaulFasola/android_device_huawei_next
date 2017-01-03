@@ -108,7 +108,7 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 #BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 #PROTOBUF_SUPPORTED := true
 #TARGET_RIL_VARIANT := proprietary
-#SIM_COUNT := 2
+
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
@@ -177,7 +177,9 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 # Sensors
 USE_SENSOR_MULTI_HAL := true
 
-# inherit from the proprietary version
+EXTENDED_FONT_FOOTPRINT := true
+
+# Inherit from the proprietary version
 -include vendor/huawei/next/BoardConfigVendor.mk
 
 # Enable ADB during boot for debugging. (Very unsafe. Remove before public build)
@@ -189,4 +191,3 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
         ro.hardware=hi3650
 
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
-

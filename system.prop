@@ -86,7 +86,7 @@ persist.sys.fingersense=1
 
 # RIL
 # For modem_id 3C002C00 only
-ro.telephony.default_network=9
+ro.telephony.default_network=9,1
 ro.multi.rild=false
 rild.libpath1=/system/lib64/libbalong-ril-1.so
 persist.dsds.enabled=true
@@ -146,7 +146,7 @@ ro.config.ipv4.mtu=1400
 gsm.fastdormancy.mode=3
 ro.config.hw_hotswap_on=true
 ro.config.hw_student_mode_on=true  
-
+ro.config.hw_lte_support=true
 ro.config.hw_showTestInfo=true
 
 ro.config.app_big_icon_size=161
