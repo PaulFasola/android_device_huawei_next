@@ -1,7 +1,6 @@
- early-init
+early-init
 
 on init
-
     mkdir /dev/frz
     mount cgroup none /dev/frz freezer
 
@@ -356,10 +355,13 @@ service powerlogd /system/bin/powerlogd
 on property:debug.rt.ddr.test=1
     stop ddrtest
     start ddrtest
+
 on property:debug.rt.ddr.test=2
     start ddrtest
+
 on property:debug.rt.ddr.test=3
     start ddrtest
+
 on property:debug.rt.ddr.test=4
     start stop_ddrtest
 

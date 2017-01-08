@@ -46,19 +46,19 @@ on fs
     chown system system /dev/block/mmcblk0
     chmod 0660 /dev/block/mmcblk0
 
-    restorecon       /sys/class/leds/red/brightness
-    restorecon       /sys/class/leds/green/brightness
-    restorecon       /sys/class/leds/blue/brightness
-    restorecon      /sys/class/leds/torch_front/brightness
-    restorecon      /sys/class/leds/torch/brightness
-    restorecon      /sys/class/hw_power/charger/charge_data/enable_charger
-    restorecon     /sys/class/leds/lcd_backlight0/brightness
-    restorecon     /sys/class/graphics/fb0/lcd_test_config
-    restorecon     /sys/class/graphics/fb0/amoled_pcd_errflag_check
-    restorecon     /sys/class/ina231/ina231_0/ina231_debug
-    restorecon     /sys/class/ina231/ina231_0/ina231_set
-    restorecon     /sys/class/ina231/ina231_0/ina231_value
-    restorecon     /sys/class/ina231/ina231_1/ina231_debug
+    restorecon    /sys/class/leds/red/brightness
+    restorecon    /sys/class/leds/green/brightness
+    restorecon    /sys/class/leds/blue/brightness
+    restorecon    /sys/class/leds/torch_front/brightness
+    restorecon    /sys/class/leds/torch/brightness
+    restorecon    /sys/class/hw_power/charger/charge_data/enable_charger
+    restorecon    /sys/class/leds/lcd_backlight0/brightness
+    restorecon    /sys/class/graphics/fb0/lcd_test_config
+    restorecon    /sys/class/graphics/fb0/amoled_pcd_errflag_check
+    restorecon    /sys/class/ina231/ina231_0/ina231_debug
+    restorecon    /sys/class/ina231/ina231_0/ina231_set
+    restorecon    /sys/class/ina231/ina231_0/ina231_value
+    restorecon    /sys/class/ina231/ina231_1/ina231_debug
     restorecon    /sys/class/ina231/ina231_1/ina231_set
     restorecon    /sys/class/ina231/ina231_1/ina231_value
     restorecon    /sys/class/graphics/fb0/amoled_acl
@@ -79,10 +79,11 @@ on fs
     restorecon    /sys/class/sensors/airpress_sensor/read_airpress
     restorecon    /sys/class/sensors/airpress_sensor/set_calidata
 
-    restorecon      /sys/kernel/set_hmp_thresholds/policy
-    restorecon      /sys/class/graphics/fb0/lcd_cabc_mode
-    restorecon      /sys/class/leds/torch/flash_thermal_protect
+    restorecon    /sys/kernel/set_hmp_thresholds/policy
+    restorecon    /sys/class/graphics/fb0/lcd_cabc_mode
+    restorecon    /sys/class/leds/torch/flash_thermal_protect
     restorecon    /sys/class/timed_output/vibrator/vibrator_calib
+
 on post-fs
 
 on post-fs-data
@@ -90,7 +91,6 @@ on post-fs-data
 on early-boot
 
 on boot
-
 
 service atcmdserver  /system/bin/atcmdserver
     class main
@@ -119,7 +119,6 @@ service check_root /sbin/check_root
     class main
     oneshot
     seclabel u:r:check_root:s0
-
 
 on property:sys.boot_completed=1
     start check_root

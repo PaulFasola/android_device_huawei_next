@@ -12,14 +12,14 @@ service teecd /system/bin/teecd
     seclabel u:r:tee:s0
 
 service teelogcat /system/bin/tlogcat -f
-class late_start
-user root
-group system
-disabled
-seclabel u:r:hisilogcat:s0
+   class late_start
+   user root
+   group system
+   disabled
+   seclabel u:r:hisilogcat:s0
 
 on property:persist.sys.huawei.debug.on=1
-start teelogcat
+   start teelogcat
 
 on property:persist.sys.huawei.debug.on=0
-stop teelogcat
+   stop teelogcat

@@ -232,7 +232,6 @@ on late-init
     trigger early-boot
     trigger boot
 
-
 on post-fs
     start logd
     mount rootfs rootfs / ro remount
@@ -327,12 +326,10 @@ on post-fs-data
     mkdir /data/lost+found 0770 root root
 
     mkdir /data/drm 0770 drm drm
-
     mkdir /data/drm/rights 0770 drm drm
     mkdir /data/drm/widevine 0770 drm drm
 
     mkdir /data/mediadrm 0770 mediadrm mediadrm
-
     mkdir /data/adb 0700 root root
 
     symlink /data/data/com.android.shell/files/bugreports /data/bugreports
@@ -347,10 +344,9 @@ on post-fs-data
     mkdir /data/user 0711 system system
 
     setusercryptopolicies /data/user
-
     setprop selinux.reload_policy 1
 
-   restorecon_recursive /data
+    restorecon_recursive /data
     restorecon /data/data
     restorecon /data/user
     restorecon /data/user/0
@@ -418,11 +414,9 @@ on boot
     chown  system  system  /sys/devices/platform/fingerprint/nav
 
     setprop ro.config.compatibility_enable 1
-
     setprop net.tcp.default_init_rwnd 60
 
     class_start core
-
     setprop hifi.watchdog.come false
 
 on property:hifi.watchdog.come=true

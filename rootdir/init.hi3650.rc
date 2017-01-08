@@ -28,7 +28,6 @@
 import /init.hi3650.usb.rc
 import /init.41038.rc
 import /init.hi3650.power.rc
-
 import /init.balong_modem.rc
 import /init.tee.rc
 
@@ -42,9 +41,6 @@ on early-boot
 
     symlink /mnt/shell/emulated/0 /storage/emulated/0
 
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0700 root root
- 
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root
 
@@ -297,9 +293,9 @@ on charger
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
 
 on fs
-    export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libandroid.so|libshim_android.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so
-
-    wait /dev/block/platform/hi_mci.0/by-name/oeminfo
+    export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib/libcamera_algo.so|libshim_general.so:/system/lib64/libcamera_algo.so|libshim_general.so
+    
+wait /dev/block/platform/hi_mci.0/by-name/oeminfo
     start oeminfo_nvm
 
     wait /dev/block/platform/hi_mci.0/by-name
@@ -412,6 +408,13 @@ on early-boot
     socket vr_daemon stream 660 root system graphics
 
 on boot
+	
+    chmod  0660  /dev/fingerprint
+    chown  system  system  /dev/fingerprint
+    chmod  0660  /sys/devices/platform/fingerprint/irq
+    chown  system  system  /sys/devices/platform/fingerprint/irq
+    chown system system /sys/devices/platform/fingerprint/fingerprint_chip_info
+
     write /proc/sys/kernel/hung_task_panic 1
     write /proc/sys/kernel/hung_task_timeout_secs 120
     write /sys/kernel/hungtask/monitorlist "whitelist,system_server,surfaceflinger"
@@ -437,7 +440,6 @@ on boot
     chown root radio /sys/kernel/sim/sim0_hotplug_state
     chown root radio /sys/kernel/sim/sim1_hotplug_state
     chown root radio /sys/kernel/sim/sim2_hotplug_state
-
     chown root radio /sys/kernel/sim/sim_hotplug_state
 
     write /splash2/sim/sim_pin_file.bin  "000000"
@@ -475,117 +477,116 @@ on boot
     symlink /system/vendor/firmware/isp_fw.elf /lib/firmware/isp_fw.elf
     symlink /system/vendor/firmware/isp_bw.elf /lib/firmware/isp_bw.elf
 
-   chown system system /dev/sensorhub
-   chmod 0660 /dev/sensorhub
-   chown system system /dev/motionhub
-   chmod 0660 /dev/motionhub
-   chown system system /sys/devices/platform/huawei_sensor/acc_info
-   chown system system /sys/devices/platform/huawei_sensor/mag_info
-   chown system system /sys/devices/platform/huawei_sensor/gyro_info
-   chown system system /sys/devices/platform/huawei_sensor/als_info
-   chown system system /sys/devices/platform/huawei_sensor/ps_info
-   chown system system /sys/devices/platform/huawei_sensor/gyro_selfTest
-   chown system system /sys/devices/platform/huawei_sensor/mag_selfTest
-   chown system system /sys/devices/platform/huawei_sensor/acc_calibrate
-   chown system system /sys/devices/platform/huawei_sensor/acc_enable
-   chown system system /sys/devices/platform/huawei_sensor/acc_setdelay
-   chown system system /sys/devices/platform/huawei_sensor/acc_selfTest
-   chown system system /sys/devices/platform/huawei_sensor/mag_enable
-   chown system system /sys/devices/platform/huawei_sensor/mag_setdelay
-   chown system system /sys/devices/platform/huawei_sensor/gyro_calibrate
-   chown system system /sys/devices/platform/huawei_sensor/gyro_enable
-	chown system system /sys/devices/platform/huawei_sensor/gyro_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/als_calibrate
-	chown system system /sys/devices/platform/huawei_sensor/als_enable
-	chown system system /sys/devices/platform/huawei_sensor/als_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/sbl_enable
-	chown system system /sys/devices/platform/huawei_sensor/sbl_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/sbl_setbacklight
-	chown system system /sys/devices/platform/huawei_sensor/ps_calibrate
-	chown system system /sys/devices/platform/huawei_sensor/ps_enable
-	chown system system /sys/devices/platform/huawei_sensor/ps_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/os_enable
-	chown system system /sys/devices/platform/huawei_sensor/os_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/lines_enable
-	chown system system /sys/devices/platform/huawei_sensor/lines_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/gras_enable
-	chown system system /sys/devices/platform/huawei_sensor/gras_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/rvs_enable
-	chown system system /sys/devices/platform/huawei_sensor/rvs_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/i2c_rw
-	chown system system /sys/devices/platform/huawei_sensor/dt_motion_stup
-	chown system system /sys/devices/platform/huawei_sensor/dt_stop_auto_motion
-	chown system system /sys/devices/platform/huawei_sensor/dt_sensor_stup
-	chown system system /sys/devices/platform/huawei_sensor/dt_stop_auto_data
-	chown system system /sys/devices/platform/huawei_sensor/airpress_enable
-	chown system system /sys/devices/platform/huawei_sensor/airpress_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/airpress_info
-	chown system system /sys/devices/platform/huawei_sensor/airpress_set_calidata
-	chown system system /sys/devices/platform/huawei_sensor/dt_stepcounter_stup
-	chown system system /sys/devices/platform/huawei_sensor/handpress_enable
-	chown system system /sys/devices/platform/huawei_sensor/handpress_info
-	chown system system /sys/devices/platform/huawei_sensor/handpress_read_data
-	chown system system /sys/devices/platform/huawei_sensor/handpress_setdelay
-	chown system system /sys/devices/platform/huawei_sensor/read_airpress
-	chown system system /sys/devices/platform/huawei_sensor/read_temperature
-
-	chown system system /sys/class/sensors/sensorhub_dbg
-	chown system system /sys/class/sensors/acc_sensor/enable
-	chown system system /sys/class/sensors/acc_sensor/set_delay
-	chown system system /sys/class/sensors/acc_sensor/info
-	chown system system /sys/class/sensors/acc_sensor/get_data
-	chown system system /sys/class/sensors/acc_sensor/self_test
-	chown system system /sys/class/sensors/acc_sensor/self_test_timeout
-	chown system system /sys/class/sensors/acc_sensor/calibrate
-	chown system system /sys/class/sensors/acc_sensor/calibrate_timeout
-	chown system system /sys/class/sensors/gyro_sensor/enable
-	chown system system /sys/class/sensors/gyro_sensor/set_delay
-	chown system system /sys/class/sensors/gyro_sensor/info
-	chown system system /sys/class/sensors/gyro_sensor/get_data
-	chown system system /sys/class/sensors/gyro_sensor/self_test
-	chown system system /sys/class/sensors/gyro_sensor/self_test_timeout
-	chown system system /sys/class/sensors/gyro_sensor/calibrate
-	chown system system /sys/class/sensors/gyro_sensor/calibrate_timeout
-	chown system system /sys/class/sensors/mag_sensor/enable
-	chown system system /sys/class/sensors/mag_sensor/set_delay
-	chown system system /sys/class/sensors/mag_sensor/info
-	chown system system /sys/class/sensors/mag_sensor/get_data
-	chown system system /sys/class/sensors/mag_sensor/self_test
-	chown system system /sys/class/sensors/mag_sensor/self_test_timeout
-	chown system system /sys/class/sensors/mag_sensor/calibrate_method
-	chown system system /sys/class/sensors/als_sensor/enable
-	chown system system /sys/class/sensors/als_sensor/set_delay
-   chown system system /sys/class/sensors/als_sensor/info
-	chown system system /sys/class/sensors/als_sensor/get_data
-	chown system system /sys/class/sensors/als_sensor/calibrate
-	chown system system /sys/class/sensors/als_sensor/calibrate_timeout
-	chown system system /sys/class/sensors/ps_sensor/enable
-	chown system system /sys/class/sensors/ps_sensor/set_delay
-	chown system system /sys/class/sensors/ps_sensor/info
-	chown system system /sys/class/sensors/ps_sensor/get_data
-	chown system system /sys/class/sensors/ps_sensor/calibrate
-	chown system system /sys/class/sensors/ps_sensor/calibrate_timeout
-	chown system system /sys/class/sensors/hall_sensor/enable
-	chown system system /sys/class/sensors/hall_sensor/set_delay
-	chown system system /sys/class/sensors/hall_sensor/info
-	chown system system /sys/class/sensors/hall_sensor/get_data
-	chown system system /sys/class/sensors/airpress_sensor/enable
-	chown system system /sys/class/sensors/airpress_sensor/set_delay
-	chown system system /sys/class/sensors/airpress_sensor/info
-	chown system system /sys/class/sensors/airpress_sensor/get_data
-   chown system system /sys/class/sensors/airpress_sensor/read_airpress
-   chown system system /sys/class/sensors/airpress_sensor/set_calidata
-   chown system system /sys/class/sensors/fingersense_sensor/set_fingersense_enable
-   chown system system /sys/class/sensors/fingersense_sensor/fingersense_data_ready
-   chown system system /sys/class/sensors/fingersense_sensor/fingersense_latch_data
-   chown system system /sys/class/sensors/fingersense_sensor/fingersense_req_data
-   chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
-   chmod 660 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
-   chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
-   chmod 444 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
-   chown system system /dev/block/mmcblk0p26
-   chmod 660 /dev/block/mmcblk0p26
-   chown system system /sys/class/sensors/libsensor_ver
+    chown system system /dev/sensorhub
+    chmod 0660 /dev/sensorhub
+    chown system system /dev/motionhub
+    chmod 0660 /dev/motionhub
+    chown system system /sys/devices/platform/huawei_sensor/acc_info
+    chown system system /sys/devices/platform/huawei_sensor/mag_info
+    chown system system /sys/devices/platform/huawei_sensor/gyro_info
+    chown system system /sys/devices/platform/huawei_sensor/als_info
+    chown system system /sys/devices/platform/huawei_sensor/ps_info
+    chown system system /sys/devices/platform/huawei_sensor/gyro_selfTest
+    chown system system /sys/devices/platform/huawei_sensor/mag_selfTest
+    chown system system /sys/devices/platform/huawei_sensor/acc_calibrate
+    chown system system /sys/devices/platform/huawei_sensor/acc_enable
+    chown system system /sys/devices/platform/huawei_sensor/acc_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/acc_selfTest
+    chown system system /sys/devices/platform/huawei_sensor/mag_enable
+    chown system system /sys/devices/platform/huawei_sensor/mag_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/gyro_calibrate
+    chown system system /sys/devices/platform/huawei_sensor/gyro_enable
+    chown system system /sys/devices/platform/huawei_sensor/gyro_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/als_calibrate
+    chown system system /sys/devices/platform/huawei_sensor/als_enable
+    chown system system /sys/devices/platform/huawei_sensor/als_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/sbl_enable
+    chown system system /sys/devices/platform/huawei_sensor/sbl_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/sbl_setbacklight
+    chown system system /sys/devices/platform/huawei_sensor/ps_calibrate
+    chown system system /sys/devices/platform/huawei_sensor/ps_enable
+    chown system system /sys/devices/platform/huawei_sensor/ps_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/os_enable
+    chown system system /sys/devices/platform/huawei_sensor/os_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/lines_enable
+    chown system system /sys/devices/platform/huawei_sensor/lines_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/gras_enable
+    chown system system /sys/devices/platform/huawei_sensor/gras_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/rvs_enable
+    chown system system /sys/devices/platform/huawei_sensor/rvs_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/i2c_rw
+    chown system system /sys/devices/platform/huawei_sensor/dt_motion_stup
+    chown system system /sys/devices/platform/huawei_sensor/dt_stop_auto_motion
+    chown system system /sys/devices/platform/huawei_sensor/dt_sensor_stup
+    chown system system /sys/devices/platform/huawei_sensor/dt_stop_auto_data
+    chown system system /sys/devices/platform/huawei_sensor/airpress_enable
+    chown system system /sys/devices/platform/huawei_sensor/airpress_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/airpress_info
+    chown system system /sys/devices/platform/huawei_sensor/airpress_set_calidata
+    chown system system /sys/devices/platform/huawei_sensor/dt_stepcounter_stup
+    chown system system /sys/devices/platform/huawei_sensor/handpress_enable
+    chown system system /sys/devices/platform/huawei_sensor/handpress_info
+    chown system system /sys/devices/platform/huawei_sensor/handpress_read_data
+    chown system system /sys/devices/platform/huawei_sensor/handpress_setdelay
+    chown system system /sys/devices/platform/huawei_sensor/read_airpress
+    chown system system /sys/devices/platform/huawei_sensor/read_temperature
+    chown system system /sys/class/sensors/sensorhub_dbg
+    chown system system /sys/class/sensors/acc_sensor/enable
+    chown system system /sys/class/sensors/acc_sensor/set_delay
+    chown system system /sys/class/sensors/acc_sensor/info
+    chown system system /sys/class/sensors/acc_sensor/get_data
+    chown system system /sys/class/sensors/acc_sensor/self_test
+    chown system system /sys/class/sensors/acc_sensor/self_test_timeout
+    chown system system /sys/class/sensors/acc_sensor/calibrate
+    chown system system /sys/class/sensors/acc_sensor/calibrate_timeout
+    chown system system /sys/class/sensors/gyro_sensor/enable
+    chown system system /sys/class/sensors/gyro_sensor/set_delay
+    chown system system /sys/class/sensors/gyro_sensor/info
+    chown system system /sys/class/sensors/gyro_sensor/get_data
+    chown system system /sys/class/sensors/gyro_sensor/self_test
+    chown system system /sys/class/sensors/gyro_sensor/self_test_timeout
+    chown system system /sys/class/sensors/gyro_sensor/calibrate
+    chown system system /sys/class/sensors/gyro_sensor/calibrate_timeout
+    chown system system /sys/class/sensors/mag_sensor/enable
+    chown system system /sys/class/sensors/mag_sensor/set_delay
+    chown system system /sys/class/sensors/mag_sensor/info
+    chown system system /sys/class/sensors/mag_sensor/get_data
+    chown system system /sys/class/sensors/mag_sensor/self_test
+    chown system system /sys/class/sensors/mag_sensor/self_test_timeout
+    chown system system /sys/class/sensors/mag_sensor/calibrate_method
+    chown system system /sys/class/sensors/als_sensor/enable
+    chown system system /sys/class/sensors/als_sensor/set_delay
+    chown system system /sys/class/sensors/als_sensor/info
+    chown system system /sys/class/sensors/als_sensor/get_data
+    chown system system /sys/class/sensors/als_sensor/calibrate
+    chown system system /sys/class/sensors/als_sensor/calibrate_timeout
+    chown system system /sys/class/sensors/ps_sensor/enable
+    chown system system /sys/class/sensors/ps_sensor/set_delay
+    chown system system /sys/class/sensors/ps_sensor/info
+    chown system system /sys/class/sensors/ps_sensor/get_data
+    chown system system /sys/class/sensors/ps_sensor/calibrate
+    chown system system /sys/class/sensors/ps_sensor/calibrate_timeout
+    chown system system /sys/class/sensors/hall_sensor/enable
+    chown system system /sys/class/sensors/hall_sensor/set_delay
+    chown system system /sys/class/sensors/hall_sensor/info
+    chown system system /sys/class/sensors/hall_sensor/get_data
+    chown system system /sys/class/sensors/airpress_sensor/enable
+    chown system system /sys/class/sensors/airpress_sensor/set_delay
+    chown system system /sys/class/sensors/airpress_sensor/info
+    chown system system /sys/class/sensors/airpress_sensor/get_data
+    chown system system /sys/class/sensors/airpress_sensor/read_airpress
+    chown system system /sys/class/sensors/airpress_sensor/set_calidata
+    chown system system /sys/class/sensors/fingersense_sensor/set_fingersense_enable
+    chown system system /sys/class/sensors/fingersense_sensor/fingersense_data_ready
+    chown system system /sys/class/sensors/fingersense_sensor/fingersense_latch_data
+    chown system system /sys/class/sensors/fingersense_sensor/fingersense_req_data
+    chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
+    chmod 660 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_config
+    chown system system /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
+    chmod 444 /sys/devices/platform/huawei_sensorhub_logbuff/logbuff_flush
+    chown system system /dev/block/mmcblk0p26
+    chmod 660 /dev/block/mmcblk0p26
+    chown system system /sys/class/sensors/libsensor_ver
 
     chown system system /sys/devices/platform/huawei_sensor/set_fingersense_enable
     chmod 0660 /sys/devices/platform/huawei_sensor/set_fingersense_enable
@@ -716,11 +717,11 @@ service kmsgcat_cp /sbin/kmsgcat -r 4096 -n 25 -i /dev/cshell_log -f /data/hwzd_
 service defragd /system/bin/defragd
     class late_start
 
-#service perfhub /system/bin/perfhub
-#    class core
-#    user system
-#    group system
-#    disabled
+service perfhub /system/bin/perfhub
+    class core
+    user system
+    group system
+    disabled
 
 on property:service.bootanim.exit=1
     write /sys/class/devfreq/ddrfreq/max_freq 1333000000
@@ -729,12 +730,12 @@ on property:service.bootanim.exit=1
     write /sys/class/devfreq/ddrfreq/max_freq 0
     write /sys/class/devfreq/ddrfreq_up_threshold/max_freq 1333000000
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
-
     write /proc/balong/stats/boot_time 1
 
 on property:persist.sys.huawei.debug.on=0
     chown system system /sys/class/sensors/sensorhub_dump
     chmod 0660 /sys/class/sensors/sensorhub_dump
+
 on property:persist.sys.huawei.debug.on=1
     chown system system /sys/class/sensors/sensorhub_dump
     chmod 0664 /sys/class/sensors/sensorhub_dump
@@ -753,7 +754,6 @@ service tui-daemon /system/bin/tui_daemon
 on property:bluetooth.log.file.create=true
    mkdir /data/hwzd_logs/bt 775 bluetooth net_bt_stack
    setprop bluetooth.log.file.create false
-
 
 service bugreport /system/bin/dumpstate -d -p -B \
         -o /data/data/com.android.shell/files/bugreports/bugreport

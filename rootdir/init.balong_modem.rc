@@ -4,6 +4,7 @@ on fs
 
 on post-fs-data
 	start pmom
+
 service pmom /system/bin/pmom_cat -i /dev/pmom -e s -r 10240 -z 3 -n 1 -f /data/android_logs/pmom-log
 	class late_start
 	user root
