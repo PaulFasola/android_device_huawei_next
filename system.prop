@@ -86,6 +86,9 @@ persist.sys.fingersense=1
 
 # RIL
 # For modem_id 3C002C00 only
+
+ro.telephony.ril_class=HwRIL
+
 ro.telephony.default_network=9,1
 ro.multi.rild=false
 rild.libpath1=/system/lib64/libbalong-ril-1.so

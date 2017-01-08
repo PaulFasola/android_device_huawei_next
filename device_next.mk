@@ -21,6 +21,7 @@ $(call inherit-product, build/target/product/full_base_telephony.mk)
 $(call inherit-product, build/target/product/languages_full.mk)
 $(call inherit-product, vendor/huawei/next/BoardConfigVendor.mk)
 $(call inherit-product, build/target/product/core_64_bit.mk)
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := device/huawei/next/kernel
@@ -59,10 +60,8 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/rootdir/init.hi3650.rc:root/init.hi3650.rc \
 	$(LOCAL_PATH)/rootdir/init.audio.rc:root/init.audio.rc \
 	$(LOCAL_PATH)/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
-	$(LOCAL_PATH)/rootdir/init.protocol.rc:root/init.protocol.rc \
 	$(LOCAL_PATH)/rootdir/init.post-fs-data.rc:root/init.post-fs-data.rc \
 	$(LOCAL_PATH)/rootdir/init.extmodem.rc:root/init.extmodem.rc \
-	$(LOCAL_PATH)/rootdir/init.performance.rc:root/init.performance.rc \
 	$(LOCAL_PATH)/rootdir/init.hi3650.gps.rc:root/init.hi3650.gps.rc \
 	$(LOCAL_PATH)/rootdir/init.hi3650.power.rc:root/init.hi3650.power.rc \
 	$(LOCAL_PATH)/rootdir/init.hi3650.power.sh:root/init.hi3650.power.sh \
@@ -104,9 +103,12 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinypcminfo
 
+PRODUCT_PACKAGES += \
+flp.default
+
 # Wifi
 PRODUCT_PACKAGES += \
-         hostapd
+     hostapd
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -114,13 +116,55 @@ PRODUCT_PACKAGES += \
 
 # Power HAL
 PRODUCT_PACKAGES += \
-    power.hi3650
+     power.hi3650
+
+# Camera
+PRODUCT_PACKAGES += \
+    camera.default
+
+# NFC
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
+	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+	frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+
+# Apps
+PRODUCT_PACKAGES += \
+    OpenGapps \
+    SuperSu
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/permissions/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.camera.external.xml:system/etc/permissions/android.hardware.camera.external.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+	$(LOCAL_PATH)/permissions/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	$(LOCAL_PATH)/permissions/android.software.app_widgets.xml:system/etc/permissions/android.software.app_widgets.xml \
+	$(LOCAL_PATH)/permissions/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
+	$(LOCAL_PATH)/permissions/android.software.webview.xml:system/etc/permissions/android.software.webview.xml \
+	$(LOCAL_PATH)/permissions/com.android.location.provider.xml:system/etc/permissions/com.android.location.provider.xml \
+	$(LOCAL_PATH)/permissions/com.android.media.remotedisplay.xml:system/etc/permissions/com.android.media.remotedisplay.xml \
+	$(LOCAL_PATH)/permissions/com.android.mediadrm.signer.xml:system/etc/permissions/com.android.mediadrm.signer.xml \
+	$(LOCAL_PATH)/permissions/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	$(LOCAL_PATH)/permissions/platform.xml:system/etc/permissions/platform.xml
 
 PRODUCT_GMS_CLIENTID_BASE := android-huawei
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril.config=simactivation
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT="HUAWEI/NXT-L29/HWNXT:6.0/HUAWEINXT-L29/C900B182:user/release-keys" \
-    PRIVATE_BUILD_DESC="EVA-L29-user 6.0 HUAWEINXT-L29 C900B182 release-keys"
