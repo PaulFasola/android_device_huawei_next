@@ -104,7 +104,7 @@ PRODUCT_PACKAGES += \
     tinypcminfo
 
 PRODUCT_PACKAGES += \
-flp.default
+    flp.default
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -131,8 +131,7 @@ PRODUCT_COPY_FILES += \
 
 # Apps
 PRODUCT_PACKAGES += \
-    OpenGapps \
-    SuperSu
+    OpenGapps
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/permissions/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
