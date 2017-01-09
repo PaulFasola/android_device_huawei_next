@@ -1,6 +1,6 @@
 # Credits
 
-Original implementation, by Surdu Perdu (https://github.com/Huawei-Dev/android_device_huawei_eva/tree/6.0.1/hwcomposer)
+Original implementation by Xpeleato (https://github.com/XePeleato/Hisi_HwComposer)
 Thanks to him !
 
-Since the orifinal HwComposer HAL is a huge mess.
+Since the original HwComposer HAL is a huge mess.

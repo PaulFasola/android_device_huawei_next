@@ -14,10 +14,9 @@
 #include <cutils/atomic.h>
 #include <utils/Trace.h>
 #include <utils/threads.h>
-#include <utils/Log.h>
 #include <hardware/hwcomposer.h>
 #include <EGL/egl.h>
-#include <ion/ion.h>
+//#include <ion/ion.h>
 #include "hwc_helper.h"
 
 static inline void
