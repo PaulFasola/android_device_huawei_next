@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2016 The LinearOS Project
+# Copyright (C) 2016 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -116,14 +116,15 @@ USE_CAMERA_STUB := false
 BOARD_CAMERA_HAVE_ISO := true
 COMMON_GLOBAL_CFLAGS += -DHAVE_ISO
 USE_DEVICE_SPECIFIC_CAMERA := true
+BOARD_QTI_CAMERA_32BIT_ONLY := true
+TARGET_USE_VENDOR_CAMERA_EXT := true
 
 # RIL
 #BOARD_PROVIDES_LIBRIL := true
-#BOARD_RIL_CLASS := ../../../device/huawei/next/ril
-#BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
-#PROTOBUF_SUPPORTED := true
-#TARGET_RIL_VARIANT := proprietary
-
+BOARD_RIL_CLASS := ../../../device/huawei/next/ril
+BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+PROTOBUF_SUPPORTED := true
+TARGET_RIL_VARIANT := caf
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
