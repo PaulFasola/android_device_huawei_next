@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-	<project name="PaulFasola/android_device_huawei_next" path="device/huawei/next" remote="github" revision="cm-13" />
-	<project name="PaulFasola/proprietary_vendor_huawei" path="vendor/huawei" remote="github" revision="cm-13" />	
-</manifest>
+  <project name="PaulFasola/android_device_huawei_next" path="device/huawei/next" remote="github" revision="laos-13" />
+  <project name="PaulFasola/android_kernel_huawei_next" path="device/huawei/next-kernel" remote="github" revision="laos-13" />
+  <project name="PaulFasola/android_vendor_huawei" path="vendor/huawei" remote="github" revision="laos-13" />
+ </manifest>
