@@ -87,7 +87,6 @@ on init
     mkdir /mnt/runtime/write 0755 root root
     mkdir /mnt/runtime/write/self 0755 root root
 
-    symlink /storage/self/primary /sdcard
     symlink /mnt/user/0/primary /mnt/runtime/default/self/primary
 
     mkdir /dev/memcg 0700 root system
