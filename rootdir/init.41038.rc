@@ -13,10 +13,12 @@ on post-fs-data
 	chown nfc nfc /data/nfc
 
 on early-boot
+        write /sys/bus/platform/drivers/huawei,altek6045/firmware /system/miniisp/CARRERA/
+
 	service HwCamCfgSvr /system/bin/HwCamCfgSvr hi3650 NEXT
 	class main
 	user media
-	group audio camera inet net_bt net_bt_admin net_bw_acct mediadrm system dsm
+	group audio camera inet net_bt net_bt_admin net_bw_acct mediadrm system
 
 	service tui-daemon /system/bin/tui_daemon
 	class main

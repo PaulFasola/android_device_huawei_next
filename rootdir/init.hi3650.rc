@@ -293,7 +293,7 @@ on charger
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
 
 on fs
-    export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/libril.so|libshim_ril.so:/system/lib64/libril.so|libshim_ril.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib/libcamera_algo.so|libshim_general.so:/system/lib64/libcamera_algo.so|libshim_general.so
+    export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib/libcamera_algo.so|libshim_general.so:/system/lib64/libcamera_algo.so|libshim_general.so:/system/lib/libhwuibp.so|libshim_hwui.so:/system/lib64/libhwuibp.so|libshim_hwui.so:/system/lib/libcamera_client.so|/system/lib/libshim_camera_client.so:/system/lib64/libcamera_client.so|/system/lib64/libshim_camera_client.so:/system/lib/libmedia.so|libshim_media.so:/system/lib64/libmedia.so|libshim_media.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib64/libhwmediamonitorservice.so|libshim_log.so
     
 wait /dev/block/platform/hi_mci.0/by-name/oeminfo
     start oeminfo_nvm
@@ -722,6 +722,9 @@ service perfhub /system/bin/perfhub
     user system
     group system
     disabled
+
+on property:persist.sys.huawei.debug.on=1
+    start perfhub
 
 on property:service.bootanim.exit=1
     write /sys/class/devfreq/ddrfreq/max_freq 1333000000
