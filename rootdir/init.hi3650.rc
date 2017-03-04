@@ -394,19 +394,6 @@ on post-fs-data
 
     write /sys/kernel/hwtc/hwtc_enable 1
 
-
-on early-boot
-    service tui-daemon /system/bin/tui_daemon
-    class main
-    group system
-    socket tui_daemon stream 660 root system graphics
-
-    service vr_daemon /system/bin/vr_daemon
-    class main
-    user system
-    group system
-    socket vr_daemon stream 660 root system graphics
-
 on boot
 	
     chmod  0660  /dev/fingerprint
@@ -743,17 +730,6 @@ on property:persist.sys.huawei.debug.on=1
     chown system system /sys/class/sensors/sensorhub_dump
     chmod 0664 /sys/class/sensors/sensorhub_dump
 
-service vr_daemon /system/bin/vr_daemon
-    class main
-    user system
-    group system
-    socket vr_daemon stream 660 root system graphics
-
-service tui-daemon /system/bin/tui_daemon
-    class main
-    group system
-    socket tui_daemon stream 660 root system graphics
-
 on property:bluetooth.log.file.create=true
    mkdir /data/hwzd_logs/bt 775 bluetooth net_bt_stack
    setprop bluetooth.log.file.create false
@@ -789,10 +765,6 @@ on property:sys.userdata_is_ready=1
     write /sys/devices/platform/his_modem/modem_sysboot_start 1
     start ril-daemon
 
-service oeminfo_nvm /system/bin/oeminfo_nvm_server
-    class core
-    ioprio rt 4
- 
 service charger_huawei /sbin/healthd -c
    class charger
    user root

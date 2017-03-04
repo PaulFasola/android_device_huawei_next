@@ -205,7 +205,6 @@ service logserver /system/bin/logserver
     user root
     group system
     oneshot
-    seclabel u:r:logserver:s0
 
 service logctl_service /sbin/logctl_service -m 1
     class late_start
@@ -306,9 +305,9 @@ service modematserver /system/bin/modemlogcat_lte -f hidp
     disabled
     oneshot
 
-#service dumptool /system/bin/dumptool
-#    class late_start
-#    seclabel u:r:logserver:s0
+service dumptool /system/bin/dumptool
+    class late_start
+    seclabel u:r:logserver:s0
 
 service hw_cdma_service /system/bin/hw_cdmamodem_service /dev/acm_cdma_log /dev/ttySPI3 /dev/ttySPI1
     class main
@@ -346,11 +345,11 @@ service powerlogd /system/bin/powerlogd
     socket powerlogdr seqpacket 0600 system system
     socket powerlogdw dgram 0220 system system
 
-#service chargemonitor /system/bin/chargemonitor
-#    class late_start
-#    user root
-#    group system
-#    seclabel u:r:hisilogcat:s0
+service chargemonitor /system/bin/chargemonitor
+    class late_start
+    user root
+    group system
+    seclabel u:r:hisilogcat:s0
 
 on property:debug.rt.ddr.test=1
     stop ddrtest
