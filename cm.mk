@@ -1,6 +1,3 @@
-# Release name
-PRODUCT_RELEASE_NAME := next
-
 # Inherit some common LaOS stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
@@ -18,8 +15,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := next
-PRODUCT_NAME := cm_next
+PRODUCT_NAME := lineage_next
 PRODUCT_BRAND := huawei
 PRODUCT_MODEL := next
 PRODUCT_MANUFACTURER := HUAWEI
-
+PRODUCT_RELEASE_NAME := Huawei Mate 8

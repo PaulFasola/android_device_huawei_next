@@ -13,6 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_lunch_combo laos_next-user
-add_lunch_combo laos_next-userdebug
-add_lunch_combo laos_next-eng
+add_lunch_combo lineage_next-user
+add_lunch_combo lineage_next-userdebug
+add_lunch_combo lineage_next-eng
