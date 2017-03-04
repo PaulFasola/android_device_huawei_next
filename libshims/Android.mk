@@ -18,7 +18,8 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
         hw_gui.cpp \
         hw_exif.c \
-        hw_cutils.c
+        hw_cutils.c \
+	hw_ui.c
 
 LOCAL_SHARED_LIBRARIES := liblog libcutils libgui libbinder libutils
 LOCAL_MULTILIB := both
