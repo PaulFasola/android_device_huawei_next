@@ -371,6 +371,8 @@
 
     <!-- Config SoftAP 2G channel list -->
     <string  translatable="false" name="config_wifi_framework_sap_2G_channel_list">6</string>
+	
+    <string translatable="false" name="config_radio_access_family">GPRS|EDGE|UMTS|HSDPA|HSUPA|HSPA|LTE|HSPAP|GSM|TD_SCDMA|WCDMA</string>
 
     <!-- Config determines whether to update phone object when voice registration
          state changes. Voice radio tech change will always trigger an update of
@@ -419,6 +421,7 @@
 
     <!-- MMS user agent string -->
     <string name="config_mms_user_agent" translatable="false">Android-Mms/2.0</string>
+
     <!-- MMS user agent prolfile url -->
     <string name="config_mms_user_agent_profile_url" translatable="false">http://wap1.huawei.com/uaprof/HUAWEI_angler-Uaprofile.xml</string>
 
