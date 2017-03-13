@@ -109,6 +109,7 @@ ro.config.hw_device_mode=
 ro.config.client_number=3
 rild.rild1_ready_to_start=false
 rild.libargs=-m modem0
+ro.config.hw_show_4G_Plus_icon=true
 
 
 #
