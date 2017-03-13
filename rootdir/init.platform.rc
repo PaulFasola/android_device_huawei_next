@@ -33,6 +33,7 @@ on post-fs
     chmod 0440 /dev/log/system_boot
     chmod 0440 /dev/log/radio_boot
 
+# Not blocking the OC
 on charger
     class_start core
 

@@ -106,6 +106,7 @@ service diagserver /system/bin/diagserver
     user root
     disabled
 
+# Not blocking the OC
 on charger
     start atcmdserver
     start diagserver

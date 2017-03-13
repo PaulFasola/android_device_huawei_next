@@ -48,6 +48,8 @@ on early-boot
     mkdir /data/samba 0755 media_rw media_rw
 
 on early-init
+    start ueventd
+
     chmod 0660 /dev/hwlog_switch
     chown logd system /dev/hwlog_switch
     chmod 0660 /dev/hwlog_tag
@@ -175,6 +177,14 @@ on init
     chown system system /sys/kernel/perfhub/cpuaffinity
     chmod 0660 /sys/kernel/perfhub/cpuaffinity
 
+    chown system system /sys/devices/virtual/graphics/fb0/blank
+    chmod 0660 /sys/devices/virtual/graphics/fb0/blank
+    chown system system /sys/devices/virtual/graphics/fb0/vsync_event
+    chmod 0660 /sys/devices/virtual/graphics/fb0/vsync_event
+    chown system system /sys/devices/virtual/graphics/fb0/mode
+    chmod 0660 /sys/devices/virtual/graphics/fb0/mode
+    write /sys/devices/virtual/graphics/fb0/mode "U:1080x1920p-0"
+
     write /sys/class/devfreq/gpufreq/min_freq 360000000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 806400
 
@@ -264,6 +274,9 @@ on property:persist.sys.fingersense=0
     write /sys/devices/platform/huawei_touch/roi_enable 0
 
 on charger
+    wait /dev/block/platform/hi_mci.0/by-name/system
+    wait /dev/block/platform/hi_mci.0/by-name/cache
+
     mount_all /fstab.hi3650
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
     restorecon_recursive /sys/devices/system/cpu/cpu0/cpufreq/interactive
@@ -276,6 +289,7 @@ on charger
     chown system system /sys/class/hw_power/charger/charge_data/iin_thermal_aux
     chmod 0660 /sys/class/hw_power/charger/charge_data/limit_charging
     chown system system /sys/class/hw_power/charger/charge_data/limit_charging
+    start _huawei_charger
     start hw_ueventd
     start oeminfo_nvm
     start limit_current
@@ -288,10 +302,11 @@ on charger
     write /sys/class/devfreq/ddrfreq/min_freq 533000000
     write /sys/class/devfreq/ddrfreq/min_freq 0
     write /sys/class/devfreq/ddrfreq/max_freq 0
-
     write /sys/class/devfreq/ddrfreq_up_threshold/max_freq 1333000000
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
 
+    write /sys/devices/virtual/graphics/fb0/mode "U:1080x1920p-0"
+    start charger
 on fs
     export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib/libcamera_algo.so|libshim_general.so:/system/lib64/libcamera_algo.so|libshim_general.so:/system/lib/libhwuibp.so|libshim_hwui.so:/system/lib64/libhwuibp.so|libshim_hwui.so:/system/lib/libcamera_client.so|/system/lib/libshim_camera_client.so:/system/lib64/libcamera_client.so|/system/lib64/libshim_camera_client.so:/system/lib/libmedia.so|libshim_media.so:/system/lib64/libmedia.so|libshim_media.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib64/libhwmediamonitorservice.so|libshim_log.so
     
@@ -395,17 +410,15 @@ on post-fs-data
     write /sys/kernel/hwtc/hwtc_enable 1
 
 on boot
-	
     chmod  0660  /dev/fingerprint
     chown  system  system  /dev/fingerprint
     chmod  0660  /sys/devices/platform/fingerprint/irq
     chown  system  system  /sys/devices/platform/fingerprint/irq
+    chmod  0660  /sys/devices/platform/fingerprint/result
+    chown  system  system  /sys/devices/platform/fingerprint/result
     chown system system /sys/devices/platform/fingerprint/fingerprint_chip_info
-
-    write /proc/sys/kernel/hung_task_panic 1
-    write /proc/sys/kernel/hung_task_timeout_secs 120
-    write /sys/kernel/hungtask/monitorlist "whitelist,system_server,surfaceflinger"
-    write /sys/kernel/hungtask/enable "on"
+    chmod  0660  /dev/madapt
+    chown  radio  radio  /dev/madapt
 
     chown system system /sys/class/leds/torch/brightness
     chmod 664 /sys/class/leds/torch/brightness
@@ -596,6 +609,9 @@ on boot
     chmod 770 /proc/hifidsp/hifi
     chown root audio /proc/hifidsp/hifi
 
+    mkdir /data/log/fingerprint system system
+    write /sys/kernel/debug/kmemleak scan=14400
+
     write /proc/sys/net/core/rps_sock_flow_entries 0
     write /sys/class/net/rmnet0/queues/rx-0/rps_flow_cnt 0
     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus e
@@ -609,10 +625,6 @@ on boot
     write /sys/class/net/rmnet4/queues/rx-0/rps_cpus e
     write /sys/class/net/rmnet_ims/queues/rx-0/rps_flow_cnt 0
     write /sys/class/net/rmnet_ims/queues/rx-0/rps_cpus e
-    write /proc/sys/kernel/hung_task_panic 1
-    write /proc/sys/kernel/hung_task_timeout_secs 120
-    write /sys/kernel/hungtask/monitorlist "whitelist,system_server,surfaceflinger"
-    write /sys/kernel/hungtask/enable "on"
 
 on property:ro.runmode=*
     start telemntncat
@@ -684,6 +696,7 @@ service shex /system/bin/shex -p
 
 on property:sys.shlogd=0
     stop shlogd
+
 on property:sys.shlogd=1
     start shlogd
 
@@ -765,8 +778,12 @@ on property:sys.userdata_is_ready=1
     write /sys/devices/platform/his_modem/modem_sysboot_start 1
     start ril-daemon
 
-service charger_huawei /sbin/healthd -c
+service huawei_charger /sbin/healthd -c
    class charger
    user root
-   group graphics
+   group system graphics
    disabled
+
+service ueventd /sbin/ueventd
+   class core
+   critical

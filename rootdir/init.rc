@@ -436,6 +436,7 @@ on property:vold.decrypt=trigger_encryption
 on property:sys.init_log_level=*
     loglevel ${sys.init_log_level}
 
+# Not blocking the OC
 on charger
     class_start charger
 
