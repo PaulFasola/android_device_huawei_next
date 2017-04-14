@@ -1,7 +1,6 @@
 Device configuration for Huawei Mate 8
 =====================================
-![android: 6.0.1](https://img.shields.io/badge/android:-6.0.1-blue.svg "booting-no")
-![device target: NXT-L29](https://img.shields.io/badge/device target:-NXT_L29-blue.svg "device target-NXT-L29")
+![android: 6.0.1](https://img.shields.io/badge/android:-6.0.1-blue.svg "booting-no") 
 ![building: yes](https://img.shields.io/badge/building:-yes-green.svg "building-yes")
 ![booting: yes](https://img.shields.io/badge/booting:-yes-green.svg "booting-yes")
 <br/><br/>
