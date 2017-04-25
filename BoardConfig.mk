@@ -62,7 +62,7 @@ BOARD_KERNEL_TAGS_OFFSET := 0x07588000
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x07b88000
 
-BOARD_KERNEL_CMDLINE  := mmcparts=mmcblk0:p1(vrl),p2(vrl_backup),p6(modemnvm_factory),p9(splash),p10(modemnvm_backup),p11(modemnvm_img),p12(modemnvm_system),p14(3rdmodemnvm),p15(3rdmodemnvmbkp),p18(modem_om),p21(modemnvm_update),p31(modem),p32(modem_dsp),p35(3rdmodem) loglevel=4 androidboot.hardware=hi3650 androidboot.selinux=permissive androidboot.dm_verity=disabled
+BOARD_KERNEL_CMDLINE  := mmcparts=mmcblk0:p1(vrl),p2(vrl_backup),p6(modemnvm_factory),p9(splash),p10(modemnvm_backup),p11(modemnvm_img),p12(modemnvm_system),p14(3rdmodemnvm),p15(3rdmodemnvmbkp),p18(modem_om),p21(modemnvm_update),p31(modem),p32(modem_dsp),p35(3rdmodem) loglevel=4 androidboot.selinux=permissive androidboot.dm_verity=disabled
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 TARGET_PREBUILT_KERNEL := device/huawei/next/kernel
 
@@ -150,6 +150,10 @@ BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/bcm_hi3650.txt
 USE_DEVICE_SPECIFIC_GPS := true
 TARGET_NO_RPC := true
 
+# NFC
+BOARD_NFC_CHIPSET := pn544
+BOARD_NFC_DEVICE := "/dev/$(BOARD_NFC_CHIPSET)"
+
 # Recovery
 RECOVERY_VARIANT := #twrp
 RECOVERY_FSTAB_VERSION := 2
@@ -180,10 +184,6 @@ endif
 
 # Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
-
-# Sensors
-USE_SENSOR_MULTI_HAL := true
-EXTENDED_FONT_FOOTPRINT := true
 
 # Inherit from the proprietary version
 -include vendor/huawei/next/BoardConfigVendor.mk

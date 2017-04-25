@@ -115,6 +115,7 @@ ro.config.hw_show_4G_Plus_icon=true
 #
 # ADDITIONAL_BUILD_PROPERTIES
 #
+ro.hardware.alter = Huawei Mate 8
 ro.carrier=unknown
 ro.setupwizard.mode=OPTIONAL
 ro.com.google.gmsversion=6.0_r2
@@ -163,6 +164,7 @@ ro.config.carkitmodenotif=true
 ro.config.protocol_errors=false
 ro.config.hw_sim2airplane=true
 ro.config.support_ca=true
+ro.config.singlehand=1
 
 modify_ram_show=true
 ro.config.colorTemperature_K3=true

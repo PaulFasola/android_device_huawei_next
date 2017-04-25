@@ -28,6 +28,7 @@
 import /init.hi3650.usb.rc
 import /init.41038.rc
 import /init.hi3650.power.rc
+#import /init.hi3650.gps.rc
 import /init.balong_modem.rc
 import /init.tee.rc
 
@@ -289,7 +290,6 @@ on charger
     chown system system /sys/class/hw_power/charger/charge_data/iin_thermal_aux
     chmod 0660 /sys/class/hw_power/charger/charge_data/limit_charging
     chown system system /sys/class/hw_power/charger/charge_data/limit_charging
-    start _huawei_charger
     start hw_ueventd
     start oeminfo_nvm
     start limit_current
@@ -306,7 +306,7 @@ on charger
     write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 1333000000
 
     write /sys/devices/virtual/graphics/fb0/mode "U:1080x1920p-0"
-    start charger
+    start huawei_charger
 on fs
     export LD_SHIM_LIBS /vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/system/lib/libdmd.so|libshim_log.so:/system/lib64/libdmd.so|libshim_log.so:/system/vendor/lib64/egl/libGLES_mali.so|libshim_log.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib/hw/audio.primary.hi3650.so|libshim_audioroute.so:/system/lib/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib64/hwcam/hwcam.hi3650.m.NEXT.so|libshim_general.so:/system/lib/libcamera_algo.so|libshim_general.so:/system/lib64/libcamera_algo.so|libshim_general.so:/system/lib/libhwuibp.so|libshim_hwui.so:/system/lib64/libhwuibp.so|libshim_hwui.so:/system/lib/libcamera_client.so|/system/lib/libshim_camera_client.so:/system/lib64/libcamera_client.so|/system/lib64/libshim_camera_client.so:/system/lib/libmedia.so|libshim_media.so:/system/lib64/libmedia.so|libshim_media.so:/system/lib/libhwmediamonitorservice.so|libshim_log.so:/system/lib64/libhwmediamonitorservice.so|libshim_log.so
     

@@ -12,6 +12,5 @@ service pmom /system/bin/pmom_cat -i /dev/pmom -e s -r 10240 -z 3 -n 1 -f /data/
 	disabled
 	seclabel u:r:hisilogcat:s0
 
-#on charger
-#	modem_fs_chk
-
+on charger
+	modem_fs_chk
