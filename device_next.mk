@@ -94,15 +94,18 @@ PRODUCT_PACKAGES += \
     tinypcminfo
 
 PRODUCT_PACKAGES += \
+    libshim_gui
+
+# FLP
+PRODUCT_PACKAGES += \
     flp.default
+
+PRODUCT_PACKAGE += \
+   libcopybit_wrapper
 
 # Wifi
 PRODUCT_PACKAGES += \
      hostapd
-
-# Fingerprint
-PRODUCT_PACKAGES += \
-     fingerprintd
 
 # Camera (thanks to Nexolight's build)
 PRODUCT_PACKAGES += \
@@ -110,15 +113,39 @@ PRODUCT_PACKAGES += \
     stlport_static
 
 # NFC
+#PRODUCT_PACKAGES += \
+#    com.android.nfc_extras \
+#    com.nxp.nfc.nq \
+#    nfc_nci.nqx.default \
+#    NQNfcNci \
+#     libnfc \
+#    libnfc_jni \
+#    Nfc
+
+
+PRODUCT_PACKAGES += \
+    Gello
+
+# OMX
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libdivxdrmdecrypt \
+    libOmxCore \
+    libOmxVdec \
+    libOmxVenc \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libstagefrighthw \
+    libdashplayer
+
+# NFC
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
 	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
 	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
 	frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
-
-# Apps
-PRODUCT_PACKAGES += \
-    OpenGapps
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/permissions/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
@@ -154,3 +181,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-huawei
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril.config=simactivation
+    ro.com.google.locationfeatures=1 \
