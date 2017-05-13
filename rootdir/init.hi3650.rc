@@ -28,7 +28,6 @@
 import /init.hi3650.usb.rc
 import /init.41038.rc
 import /init.hi3650.power.rc
-#import /init.hi3650.gps.rc
 import /init.balong_modem.rc
 import /init.tee.rc
 
@@ -409,6 +408,21 @@ on post-fs-data
 
     write /sys/kernel/hwtc/hwtc_enable 1
 
+    setprop sys.userdata_is_ready 1
+
+on early-boot
+    service tui-daemon /system/bin/tui_daemon
+    class main
+    group system
+    socket tui_daemon stream 660 root system graphics
+
+on early-boot
+    service vr_daemon /system/bin/vr_daemon
+    class main
+    user system
+    group system
+    socket vr_daemon stream 660 root system graphics
+
 on boot
     chmod  0660  /dev/fingerprint
     chown  system  system  /dev/fingerprint
@@ -721,10 +735,6 @@ service perfhub /system/bin/perfhub
     class core
     user system
     group system
-    disabled
-
-on property:persist.sys.huawei.debug.on=1
-    start perfhub
 
 on property:service.bootanim.exit=1
     write /sys/class/devfreq/ddrfreq/max_freq 1333000000
@@ -753,6 +763,10 @@ service bugreport /system/bin/dumpstate -d -p -B \
     disabled
     oneshot
 
+on property:sys.stock=1
+    start teecd
+    start volisnotd
+
 on property:ro.runmode=factory
     chown system system /sys/bus/platform/drivers/huawei,ald2/test_ocram
     chmod 664 /sys/bus/platform/drivers/huawei,ald2/test_ocram
@@ -778,11 +792,23 @@ on property:sys.userdata_is_ready=1
     write /sys/devices/platform/his_modem/modem_sysboot_start 1
     start ril-daemon
 
+on property:sys.restart_perfhub=true
+    restart perfhub
+    setprop sys.restart_perfhub false
+
 service huawei_charger /sbin/healthd -c
    class charger
    user root
    group system graphics
    disabled
+
+service teecd /system/sbin/teecd
+    socket tee-multi-user stream 660 root system
+    disabled
+    class core
+    user root
+    group root
+    seclabel u:r:tee:s0
 
 service ueventd /sbin/ueventd
    class core
