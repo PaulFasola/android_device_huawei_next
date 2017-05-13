@@ -25,24 +25,20 @@ echo "===> Extracting fstab.hi3650\n"
 adb pull /fstab.hi3650 ../../../proprietary/fstab.hi365
 echo "===> Extracting init.hi3650.rc\n"
 adb pull /init.hi3650.rc ../../../proprietary/init.hi3650.r
-echo "===> Extracting init.connectivity.bcm43xx.rc\n"
-adb pull /init.connectivity.bcm43xx.rc ../../../proprietary/init.connectivity.bcm43xx.r
 echo "===> Extracting init.audio.rc\n"
 adb pull /init.audio.rc ../../../proprietary/init.audio.r
 echo "===> Extracting init.zygote64_32.rc\n"
 adb pull /init.zygote64_32.rc ../../../proprietary/init.zygote64_32.r
-echo "===> Extracting init.protocol.rc\n"
-adb pull /init.protocol.rc ../../../proprietary/init.protocol.r
+echo "===> Extracting init.hi3650.rc.old\n"
+adb pull /init.hi3650.rc.old ../../../proprietary/init.hi3650.rc.ol
+echo "===> Extracting init.41038.rc\n"
+adb pull /init.41038.rc ../../../proprietary/init.41038.r
 echo "===> Extracting init.post-fs-data.rc\n"
 adb pull /init.post-fs-data.rc ../../../proprietary/init.post-fs-data.r
 echo "===> Extracting init.extmodem.rc\n"
 adb pull /init.extmodem.rc ../../../proprietary/init.extmodem.r
-echo "===> Extracting init.performance.rc\n"
-adb pull /init.performance.rc ../../../proprietary/init.performance.r
 echo "===> Extracting init.hi3650.gps.rc\n"
 adb pull /init.hi3650.gps.rc ../../../proprietary/init.hi3650.gps.r
-echo "===> Extracting init.rc.lol\n"
-adb pull /init.rc.lol ../../../proprietary/init.rc.lo
 echo "===> Extracting init.hi3650.usb.rc\n"
 adb pull /init.hi3650.usb.rc ../../../proprietary/init.hi3650.usb.r
 echo "===> Extracting init.tee.rc\n"
@@ -75,12 +71,10 @@ echo "===> Extracting sbin/teecd\n"
 adb pull /sbin/teecd ../../../proprietary/sbin
 echo "===> Extracting sbin/check_root\n"
 adb pull /sbin/check_root ../../../proprietary/sbin
-echo "===> Extracting sbin/oeminfo_nvm_server\n"
-adb pull /sbin/oeminfo_nvm_server ../../../proprietary/sbin
 echo "===> Extracting sbin/hw_ueventd\n"
 adb pull /sbin/hw_ueventd ../../../proprietary/sbin
 echo "===> Extracting sbin/ntfs-3gd\n"
 adb pull /sbin/ntfs-3gd ../../../proprietary/sbin
 
 
-# Total 34 files added on 2016-11-22T23:39:59.436522 UTC
+# Total 31 files added on 2017-05-12T11:45:28.775071 UTC

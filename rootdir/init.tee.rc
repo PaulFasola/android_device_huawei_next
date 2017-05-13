@@ -4,7 +4,7 @@ on init
 on init
     chmod 0400 /dev/hisi_teelog
 
-service teecd /system/bin/teecd
+service teecd /system/sbin/teecd
     socket tee-multi-user stream 660 root system
     class core
     user root

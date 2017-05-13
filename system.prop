@@ -54,6 +54,27 @@ ro.sys.fw.bservice_enable=true
 # Custom Addition
 #
 
+# Camera
+media.stagefright.legacyencoder=true
+media.stagefright.less-secure=true
+persist.camera.cpp.duplication=false
+persist.camera.hal.debug=0
+persist.camera.promode=true
+persist.hw_camera.video_sta=true
+ro.config.hw_burst_snapshot=true
+ro.config.hw_camera_bestShot=true
+ro.config.hw_camera_blureffect=false
+ro.config.hw_camera_davinci=true
+ro.config.hw_camera_docbeauty=true
+ro.config.hw_camera_hdr=true
+ro.config.hw_camera_mfd=true
+ro.config.hw_camera_nicefood=true
+ro.config.hw_camera_omron=true
+ro.config.hw_camera_refocus=true
+ro.config.hw_camera_smartae=false
+ro.config.hw_camera_zsl=true
+ro.config.hw_video_beauty=true
+
 # Enable USB OTG
 persist.sys.isUsbOtgEnabled=true
 
@@ -85,31 +106,15 @@ ro.telephony.call_ring.delay=0
 persist.sys.fingersense=1
 
 # RIL
-# For modem_id 3C002C00 only
+ril.hw_modem0.rssi=-1
+ril.hw_modem1.rssi=-1
 
-ro.telephony.ril_class=HwRIL
+# NFC
+ro.config.hw_nfc_on=true
+ro.config.hw_nfc_msimce=false
 
-ro.telephony.default_network=9,1
-ro.multi.rild=false
-rild.libpath1=/system/lib64/libbalong-ril-1.so
-persist.dsds.enabled=true
-rild.libargs1=-m modem1
-ro.config.full_network_support=false
-rild.libpath=/system/lib64/libbalong-ril.so
-rild.libargs2=-m modem2
-persist.radio.multisim.config=dsda
-ro.config.is_start_commril=true
-rild.libpath2=/system/lib64/libbalong-ril-2.so
-persist.radio.modem.cap=899BD
-ro.config.dsds_mode=umts_gsm
-ro.config.hw_dsda=true
-ro.config.modem_number=3
-ro.config.default_commril_mode=ULG_MODE
-ro.config.hw_device_mode=
-ro.config.client_number=3
-rild.rild1_ready_to_start=false
-rild.libargs=-m modem0
-ro.config.hw_show_4G_Plus_icon=true
+# OTA 
+cm.updater.uri=http://ota-updater.paulfasola.fr/api
 
 
 #
@@ -127,12 +132,9 @@ dalvik.vm.isa.arm.variant=cortex-a15
 dalvik.vm.isa.arm.features=default
 net.bt.name=HuaweiMate8
 dalvik.vm.stack-trace-file=/data/anr/traces.txt
-ro.expect.recovery_id=
-
 ro.config.fm_type=libbcmfm_if 
 persist.radio.apm_sim_not_pwdn=1
 persist.service.tm2.tofile=true
-persist.sys.dualcards=true
 ril.hw_modem0.rssi=-1
 ril.hw_modem1.rssi=-1
 ro.cellbroadcast.emergencyids=0-65534
@@ -178,7 +180,6 @@ ro.config.hw_smartcardservice=true
 ro.config.hw_subtitle_support=true
 ro.config.hw_support_geofence=true
 ro.config.hw_touchplus_enabled=false
-ro.dual.sim.phone=true
 ro.hwcamera.previeweffects=true
 ro.config.lvm_mode=true
 ro.config.wind_noise_supp=true
@@ -219,4 +220,8 @@ ro.config.small_cover_size=_1047x1312
 ro.com.android.mobiledata=true
 ro.config.hw_power_saving=true
 
-cm.updater.uri=http://ota-updater.paulfasola.fr/api
+
+
+persist.radio.apm_sim_not_pwdn=1
+
+
