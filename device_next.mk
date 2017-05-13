@@ -46,30 +46,36 @@ TARGET_SCREEN_WIDTH := 1080
 # Ramdisk
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/rootdir/init.balong_modem.rc:root/init.balong_modem.rc \
-	$(LOCAL_PATH)/rootdir/init.chip.usb.rc:root/init.chip.usb.rc \
-	$(LOCAL_PATH)/rootdir/init.connectivity.rc:root/init.connectivity.rc \
-	$(LOCAL_PATH)/rootdir/init.connectivity.bcm43455.rc:root/init.connectivity.bcm43455.rc \
-	$(LOCAL_PATH)/rootdir/fstab.hi3650:root/fstab.hi3650 \
-	$(LOCAL_PATH)/rootdir/init.41038.rc:root/init.41038.rc \
-	$(LOCAL_PATH)/rootdir/init.hi3650.rc:root/init.hi3650.rc \
-	$(LOCAL_PATH)/rootdir/init.audio.rc:root/init.audio.rc \
-	$(LOCAL_PATH)/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
-	$(LOCAL_PATH)/rootdir/init.post-fs-data.rc:root/init.post-fs-data.rc \
-	$(LOCAL_PATH)/rootdir/init.extmodem.rc:root/init.extmodem.rc \
-	$(LOCAL_PATH)/rootdir/init.hi3650.gps.rc:root/init.hi3650.gps.rc \
-	$(LOCAL_PATH)/rootdir/init.hi3650.power.rc:root/init.hi3650.power.rc \
-	$(LOCAL_PATH)/rootdir/init.hi3650.power.sh:root/init.hi3650.power.sh \
-	$(LOCAL_PATH)/rootdir/init.hi3650.usb.rc:root/init.hi3650.usb.rc \
-	$(LOCAL_PATH)/rootdir/init.tee.rc:root/init.tee.rc \
-	$(LOCAL_PATH)/rootdir/ueventd.hi3650.rc:root/ueventd.hi3650.rc \
-	$(LOCAL_PATH)/rootdir/init.connectivity.hisi.rc:root/init.connectivity.hisi.rc \
-	$(LOCAL_PATH)/rootdir/init.manufacture.rc:root/init.manufacture.rc \
-	$(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
-	$(LOCAL_PATH)/rootdir/init.device.rc:root/init.device.rc \
-	$(LOCAL_PATH)/rootdir/init.zygote32.rc:root/init.zygote32.rc \
-	$(LOCAL_PATH)/rootdir/init.platform.rc:root/init.platform.rc \
-	$(LOCAL_PATH)/rootdir/init.connectivity.gps.rc:root/init.connectivity.gps.rc \
-	$(LOCAL_PATH)/rootdir/init.hisi.rc:root/init.hisi.rc
+        $(LOCAL_PATH)/rootdir/init.chip.usb.rc:root/init.chip.usb.rc \
+        $(LOCAL_PATH)/rootdir/init.connectivity.rc:root/init.connectivity.rc \
+        $(LOCAL_PATH)/rootdir/init.connectivity.bcm43455.rc:root/init.connectivity.bcm43455.rc \
+        $(LOCAL_PATH)/rootdir/fstab.hi3650:root/fstab.hi3650 \
+        $(LOCAL_PATH)/rootdir/init.hi3650.rc:root/init.hi3650.rc \
+        $(LOCAL_PATH)/rootdir/init.audio.rc:root/init.audio.rc \
+        $(LOCAL_PATH)/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
+        $(LOCAL_PATH)/rootdir/init.hi3650.rc.old:root/init.hi3650.rc.old \
+        $(LOCAL_PATH)/rootdir/init.41038.rc:root/init.41038.rc \
+        $(LOCAL_PATH)/rootdir/init.post-fs-data.rc:root/init.post-fs-data.rc \
+        $(LOCAL_PATH)/rootdir/init.extmodem.rc:root/init.extmodem.rc \
+        $(LOCAL_PATH)/rootdir/init.hi3650.gps.rc:root/init.hi3650.gps.rc \
+        $(LOCAL_PATH)/rootdir/init.hi3650.usb.rc:root/init.hi3650.usb.rc \
+        $(LOCAL_PATH)/rootdir/init.tee.rc:root/init.tee.rc \
+        $(LOCAL_PATH)/rootdir/ueventd.hi3650.rc:root/ueventd.hi3650.rc \
+        $(LOCAL_PATH)/rootdir/init.connectivity.hisi.rc:root/init.connectivity.hisi.rc \
+        $(LOCAL_PATH)/rootdir/init.hi3650.power.sh:root/init.hi3650.power.sh \
+        $(LOCAL_PATH)/rootdir/init.manufacture.rc:root/init.manufacture.rc \
+        $(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
+        $(LOCAL_PATH)/rootdir/init.device.rc:root/init.device.rc \
+        $(LOCAL_PATH)/rootdir/init.zygote32.rc:root/init.zygote32.rc \
+        $(LOCAL_PATH)/rootdir/init.platform.rc:root/init.platform.rc \
+        $(LOCAL_PATH)/rootdir/init.connectivity.gps.rc:root/init.connectivity.gps.rc \
+        $(LOCAL_PATH)/rootdir/init.hisi.rc:root/init.hisi.rc \
+        $(LOCAL_PATH)/rootdir/init.hi3650.power.rc:root/init.hi3650.power.rc \
+        $(LOCAL_PATH)/rootdir/sbin/logctl_service:root/sbin/logctl_service \
+        $(LOCAL_PATH)/rootdir/sbin/teecd:root/sbin/teecd \
+        $(LOCAL_PATH)/rootdir/sbin/check_root:root/sbin/check_root \
+        $(LOCAL_PATH)/rootdir/sbin/hw_ueventd:root/sbin/hw_ueventd \
+        $(LOCAL_PATH)/rootdir/sbin/ntfs-3gd:root/sbin/ntfs-3gd
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -93,6 +99,19 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinypcminfo
 
+# OMX
+PRODUCT_PACKAGES += \
+    libdashplayer \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVenc \
+    libstagefrighthw
+
+
 PRODUCT_PACKAGES += \
     libshim_gui
 
@@ -110,7 +129,11 @@ PRODUCT_PACKAGES += \
 # Camera (thanks to Nexolight's build)
 PRODUCT_PACKAGES += \
     stlport \
-    stlport_static
+    stlport_static \
+    camera.default \
+    camera.hi3635 \
+    libcamera_client \
+    libcamera_metadata
 
 # NFC
 #PRODUCT_PACKAGES += \
@@ -122,7 +145,15 @@ PRODUCT_PACKAGES += \
 #    libnfc_jni \
 #    Nfc
 
+# Fingerprint
+PRODUCT_PACKAGES += \
+    fingerprint.default
 
+# Huawei specific
+PRODUCT_PACKAGES += \
+    com.huawei.cust
+
+# Gello
 PRODUCT_PACKAGES += \
     Gello
 
@@ -139,6 +170,15 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libstagefrighthw \
     libdashplayer
+
+# LibION
+PRODUCT_PACKAGES += \
+    libion
+
+# File System
+PRODUCT_PACKAGES += \
+	make_ext4fs \
+        setup_fs
 
 # NFC
 PRODUCT_COPY_FILES += \
@@ -180,5 +220,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_GMS_CLIENTID_BASE := android-huawei
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril.config=simactivation
-    ro.com.google.locationfeatures=1 \
+    ro.telephony.ril.config=simactivation \
+    ro.com.google.locationfeatures=1

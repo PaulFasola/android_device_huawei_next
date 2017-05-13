@@ -80,6 +80,11 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 26935820288
 BOARD_FLASH_BLOCK_SIZE := 4096
 
+# Custom init (prop switcher)
+TARGET_INIT_VENDOR_LIB := libinit_next
+TARGET_RECOVERY_DEVICE_MODULES := libinit_next
+TARGET_UNIFIED_DEVICE := true
+
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun/file"
 
@@ -109,7 +114,15 @@ BOARD_USES_GENERIC_AUDIO := false
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 
 # Camera
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
+USE_DEVICE_SPECIFIC_CAMERA := true
+BOARD_NUMBER_OF_CAMERAS := 2
+BOARD_CAMERA_HAVE_ISO := true
+COMMON_GLOBAL_CFLAGS += -DHAVE_ISO
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+
+# DT2W
+TARGET_TAP_TO_WAKE_NODE := "/sys/touchscreen/easy_wakeup_gesture"
 
 # RIL
 #BOARD_RIL_CLASS := ../../../device/huawei/next/ril
