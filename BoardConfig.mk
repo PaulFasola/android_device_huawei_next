@@ -81,9 +81,9 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 26935820288
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Custom init (prop switcher)
-TARGET_INIT_VENDOR_LIB := libinit_next
-TARGET_RECOVERY_DEVICE_MODULES := libinit_next
-TARGET_UNIFIED_DEVICE := true
+#TARGET_INIT_VENDOR_LIB := libinit_next
+#TARGET_RECOVERY_DEVICE_MODULES := libinit_next
+#TARGET_UNIFIED_DEVICE := true
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun/file"

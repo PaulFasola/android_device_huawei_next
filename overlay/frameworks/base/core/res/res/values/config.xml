@@ -26,8 +26,6 @@
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
 
-    <string name="config_orientationSensorType">com.google.sensor.window_orientation</string>
-
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
          The default is false. -->
@@ -139,17 +137,9 @@
     <!-- Default LED off time for notification LED in milliseconds. -->
     <integer name="config_defaultNotificationLedOff">9000</integer>
 
-    <!-- Does the notification LED support multiple colors?
-         Used to decide if the user can change the colors -->
-    <bool name="config_multiColorNotificationLed">true</bool>
-
     <!-- Is the battery LED intrusive?
          Used to decide if there should be a disable option -->
     <bool name="config_intrusiveBatteryLed">true</bool>
-
-    <!-- Does the battery LED support multiple colors?
-         Used to decide if the user can change the colors -->
-    <bool name="config_multiColorBatteryLed">true</bool>
 
     <!-- reference volume index for music stream to limit headphone volume and display warning -->
     <integer name="config_safe_media_volume_index">4</integer>
@@ -356,18 +346,6 @@
 
     <!-- Operating volatage for wifi radio. 0 by default-->
     <integer translatable="false" name="config_wifi_operating_voltage_mv">3800</integer>
-
-    <!-- The color transforms for the built-in display. Each items corresponds
-         to a defined configuration mode:
-            1. Wide-gamut ("Vibrant")
-            2. Adobe RGB ("Natural")
-            3. sRGB ("Standard")
-    -->
-    <integer-array name="config_colorTransforms">
-        <item>0</item>
-        <item>8</item>
-        <item>7</item>
-    </integer-array>
 
     <!-- Config SoftAP 2G channel list -->
     <string  translatable="false" name="config_wifi_framework_sap_2G_channel_list">6</string>
